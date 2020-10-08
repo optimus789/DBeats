@@ -1,0 +1,67 @@
+
+@font-face {
+  font-family: "evil";
+  src: url("../fonts/Evil\ Empire.otf");
+}
+
+@font-face {
+  font-family: "halaney";
+  src: url("../fonts/Halaney-Demo.otf");
+}
+@font-face {
+  font-family: "gont";
+  src: url("../fonts/Gontserrat-Regular.ttf");
+}
+
+.evil{
+  font-family: "evil";
+
+}
+.gont{
+  font-family: "gont";
+
+}
+.halaney{
+  font-family: "halaney";
+
+}
+h3{
+  font-family: "evil";
+color: white;
+}
+
+h1{
+  font-family: "evil";
+color: #2A9DFF;
+}
+
+.card-title{
+  font-family: "gont";
+color: white;
+}
+.stay-tuned{
+  background-image: linear-gradient(to right, #802392 , #ea8ffc);
+  font-size: 22px;
+}
+.container {
+    height: 100vh;
+    position: relative; 
+  }
+  
+.vertical-center { 
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  }
+
+.card{
+  
+  filter: drop-shadow(0 0.45rem 0.2rem rgba(102, 102, 102, 0.5));
+
+}
+.fixed-bottom /* position fixed Bottom */{position:fixed;bottom:0px;top:auto;}
+
+   

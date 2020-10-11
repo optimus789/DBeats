@@ -26,7 +26,7 @@
 
 audio::-webkit-media-controls-play-button,
                 audio::-webkit-media-controls-panel {
-                background-color: rgba(255, 255, 255, 0.1);
+                background-color: #FFF;
                 color: #000;
                 }
             #music-player {
@@ -158,13 +158,13 @@ audio::-webkit-media-controls-play-button,
                
          <p class="account text-center  mt-3" style="display: none;">Account: <span class="showAccount"></span></p>
          
-        <h1 class="text-center  mt-3 shadow-img" style="filter: drop-shadow(0 0 0.9rem #16E9E5)!important; color: #FFF;">Trending Tracks</h1>
+        <h1 class="text-center  mt-3">Trending Tracks</h1>
 
         <div id="demo"  style="padding-bottom:50px; " > 
         
         </div>
 
-        <h1 class="text-center  my-3  " style="  filter: drop-shadow(0 0 0.9rem #16E9E5)!important; color: #FFF;">Your Feed</h1>
+        <h1 class="text-center  my-3">Your Feed</h1>
 
         <div id="demo3"  style="margin-bottom:50px; " > 
 
@@ -230,26 +230,23 @@ audio::-webkit-media-controls-play-button,
 <br>
 
 
-        <div class="now-playing fixed-bottom  mx-5  px-5 py-3  card shadow"  style="border-radius: 50px 50px 0px 0px ;
-        filter: drop-shadow(0.0rem -0.25rem 0.2rem rgba(102, 102, 102, 0.3));background-color: #ffffff;
-background-image: linear-gradient(180deg, #ffffff 0%, #ffffff 90%, #16E9E5 100%);
-"> 
+        <div class="now-playing fixed-bottom  mx-5  p-3 card shadow" style="  filter: drop-shadow(0.0rem -0.25rem 0.2rem rgba(102, 102, 102, 0.3));"> 
             <div class="row">
 
                 <div class="col-sm-2">
-                    <img id="now-playing-artwork" class="shadow-img rounded-circle rotating" src="img/cd.png" width="100px" height="100px" alt="">
+                    <img id="now-playing-artwork" class="shadow-img rounded-circle rotating" src="https://via.placeholder.com/150  " width="100px" height="100px" alt="">
 
                 </div>
 
                 <div class="col-sm-10 text-right  ">
-                    <div id="title"    >
+                    <div id="title" class="m-1 text-black ">
                         Title
                     </div>
-                    <div id="artist"  >
+                    <div id="artist" class="m-1">
                         Artist
     
                     </div> 
-                            <button class="btn    rounded-pill  "  id="subscribe" data-artist="" style="width: 150px;" type="submit">SUBSCRIBE</button>
+                            <button class="btn  my-2 my-sm-0 rounded-pill  "  id="subscribe" data-artist="" style="width: 150px;" type="submit">SUBSCRIBE</button>
      
                 </div>
             </div>
@@ -493,7 +490,7 @@ getAccount();
             }
             audio.load();//suspends and restores all audio element
             title.innerHTML = $(this).attr('name');
-            artist.innerHTML = "By : "+$(this).attr("data-artist")
+            artist.innerHTML = $(this).attr("data-artist")
             //audio[0].play(); changed based on Sprachprofi's comment below
 
             audio.oncanplaythrough = audio.play();
@@ -519,7 +516,7 @@ getAccount();
             }
             audio.load();//suspends and restores all audio element
             title.innerHTML = $(thiselement).attr('name');
-            artist.innerHTML = "By : "+$(thiselement).attr("data-artist")
+            artist.innerHTML = $(thiselement).attr("data-artist")
             //audio[0].play(); changed based on Sprachprofi's comment below
 
             audio.oncanplaythrough = audio.play();
@@ -543,7 +540,7 @@ getAccount();
                 from: currentAccount,
                 to: '0x185f27585Bd84EFB8E7F652A3D4E6355138cE9F9',
                 value: '3782DACE9D90000',
-                gasPrice: '3B9ACA00',
+                gasPrice: '0x64',
                 gas: '0x5208',
                 },
             ],
@@ -555,7 +552,7 @@ getAccount();
             
 
             
-           setArtis(userId);
+           setArtis();
            getArtis();
                   console.log(txHash)})
             .catch((error) => console.error);
@@ -564,7 +561,7 @@ getAccount();
        }); 
 
 
-       async function setArtis(userId){
+       async function setArtis(){
                 let c = await RemixContract.setArtist(currentAccount,""+userId);
             var d = c.wait();
         console.log(c);

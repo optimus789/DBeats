@@ -14,21 +14,15 @@
         
         <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
         <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-        
-        
 
-		<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">-->
-        <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">-->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
 
         <link href="styles/styles.css" rel="stylesheet">
 
         <style>
 
-audio::-webkit-media-controls-play-button,
-                audio::-webkit-media-controls-panel {
-                background-color: rgba(255, 255, 255, 0.1);
-                color: #000;
-                }
+
             #music-player {
           
             width:100%;
@@ -109,6 +103,7 @@ audio::-webkit-media-controls-play-button,
                 <li class="nav-item d-none">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                 </li>
+                <button class="btn btn-outline-info my-2 my-sm-0  subscribe" type="submit">SUBSCRIBE</button>
                 
 
             </ul><!-- Search form -->
@@ -158,105 +153,25 @@ audio::-webkit-media-controls-play-button,
                
          <p class="account text-center  mt-3" style="display: none;">Account: <span class="showAccount"></span></p>
          
-        <h1 class="text-center  mt-3 shadow-img" style="filter: drop-shadow(0 0 0.9rem #16E9E5)!important; color: #FFF;">Trending Tracks</h1>
+        <h1 class="text-center  mt-3">Trending Tracks</h1>
 
-        <div id="demo"  style="padding-bottom:50px; " > 
+        <div id="demo"  class="bg-black" style="padding-bottom:50px; " > 
         
         </div>
 
-        <h1 class="text-center  my-3  " style="  filter: drop-shadow(0 0 0.9rem #16E9E5)!important; color: #FFF;">Your Feed</h1>
-
-        <div id="demo3"  style="margin-bottom:50px; " > 
-
-        </div>
-
-         
-    <script type="text/javascript">
-        window.onload=function(){
-            $('#demo3').slick({
-    slidesToShow: 7,
-    slidesToScroll: 3,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    arrows: false, 
-   
-    dots: false, 
-    pauseOnHover: true,
-        responsive: [{
-        breakpoint: 992,
-        settings: {
-     
-        slidesToShow:3,
-        
-      
-        }
-    },{
-        breakpoint: 768,
-        settings: {
-            slidesToShow: 4
-        }
-    }, {
-        breakpoint: 520,
-        settings: {
-            slidesToShow: 3
-        }
-    }, {
-        breakpoint: 240,
-        settings: {
-            slidesToShow: 2
-        }
-    },]
-});
-        };
-        
 
 
-    </script>
-        
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
-<br>
-<br>
-
-<br>
-<br>
-
-<br>
-<br>
-
-
-        <div class="now-playing fixed-bottom  mx-5  px-5 py-3  card shadow"  style="border-radius: 50px 50px 0px 0px ;
-        filter: drop-shadow(0.0rem -0.25rem 0.2rem rgba(102, 102, 102, 0.3));background-color: #ffffff;
-background-image: linear-gradient(180deg, #ffffff 0%, #ffffff 90%, #16E9E5 100%);
-"> 
-            <div class="row">
-
-                <div class="col-sm-2">
-                    <img id="now-playing-artwork" class="shadow-img rounded-circle rotating" src="img/cd.png" width="100px" height="100px" alt="">
-
-                </div>
-
-                <div class="col-sm-10 text-right  ">
-                    <div id="title"    >
-                        Title
-                    </div>
-                    <div id="artist"  >
-                        Artist
-    
-                    </div> 
-                            <button class="btn    rounded-pill  "  id="subscribe" data-artist="" style="width: 150px;" type="submit">SUBSCRIBE</button>
-     
-                </div>
+        <div class="now-playing fixed-bottom text-center p-3 card shadow">
+            <div id="title">
+                Title
             </div>
-               
-                <audio id="music-player" class="mt-3 bg-transparent"   controls><source id="music-player-src"  src="https://discoveryprovider.audius.co/v1/tracks/5QBJ1/stream" type="audio/mpeg">Your browser does not support the audio element.</audio> </div>
-                 
-        </div> 
+            <div id="artist">
+                Artist
+            </div>
+            <audio id="music-player" controls><source id="music-player-src"  src="https://discoveryprovider.audius.co/v1/tracks/5QBJ1/stream" type="audio/mpeg">Your browser does not support the audio element.</audio> </div>
+
+        </div>
 
 </body>
 
@@ -277,24 +192,21 @@ background-image: linear-gradient(180deg, #ffffff 0%, #ffffff 90%, #16E9E5 100%)
         crossorigin="anonymous"
     ></script>
 
-    
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
             
 
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script>
     
 
     <script src="https://cdn.jsdelivr.net/npm/@portis/web3@2.0.0-beta.56/umd/index.js"  integrity="sha256-YglsZuKbHpe2+U4HYCd3juAiADRTU7Ys2AGfCGY+Nmo=" crossorigin="anonymous"> </script>  
     <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.2.11/dist/web3.min.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@compound-finance/compound-js@latest/dist/browser/compound.min.js"></script>
     <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" charset="utf-8" type="text/javascript"></script>
     <script src="script.js"></script>
 
     
-    
     <script> 
-    
 
     const compound = new Compound(window.ethereum);
 
@@ -308,10 +220,6 @@ background-image: linear-gradient(180deg, #ffffff 0%, #ffffff 90%, #16E9E5 100%)
 
 */
 
-   
-loadTrending(); 
-
-getAccount();
    
 
     function getJSON(url) {
@@ -331,15 +239,12 @@ getAccount();
             return resp ;
         } 
 
-        function loadTrending(){
-
-
-            var gjson ;
+        var gjson ;
         gjson = getJSON('https://discoveryprovider.audius.co/v1/tracks/trending') ;
 
-        var gjson2 = JSON.parse(gjson);
 
-        for(var i =0;i<35;i++){
+        var gjson2 = JSON.parse(gjson);
+        for(var i =0;i<20;i++){
                 var artwork = gjson2.data[i].artwork['150x150'];
                 var description = gjson2.data[i].description;
                 var duration = gjson2.data[i].duration;
@@ -348,14 +253,10 @@ getAccount();
                 var user = gjson2.data[i].user;     
                 var username = gjson2.data[i].user.name;
                 var userId = gjson2.data[i].user.id;
-                var trackLayout = '<div class="card m-3 music-artwork" style="width: 150px;height:200px;" data-artwork="'+artwork+'" data-artist="'+username+'" data-artistid="'+userId+'" name="'+title+'"   data-id="'+id+'" ><img class="rounded"  style="height:100%;width:100%;" src="'+artwork+'" alt="Card image cap"><div class="card-body"   ><h5 class="card-title text-center">'+title+'</h5> </div></div>';
+                var trackLayout = '<div class="card m-3 music-artwork  " style="width: 150px;height:200px;" data-artist="'+username+'" name="'+title+'"  id="'+id+'" ><img class="rounded"  style="height:100%;width:100%;" src="'+artwork+'" alt="Card image cap"><div class="card-body"   ><h5 class="card-title text-center">'+title+'</h5> </div></div>';
                 $('#demo').append(trackLayout);
-                console.log(i);    
-
+                 
         }
-
-        }
-
        
         var audio = document.getElementById('music-player');
         
@@ -371,51 +272,6 @@ getAccount();
 
         var currentAccount;
 
-        var subscribedTo="";
-
-        var selectedArtworkUrl ="https://via.placeholder.com/150";
-
-        var abi = [
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_Address",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "_artistID",
-				"type": "string"
-			}
-		],
-		"name": "setArtist",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_Address",
-				"type": "address"
-			}
-		],
-		"name": "getArtist",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "s",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	}
-];
-
-        var cntAddress = "0x1098fE06883B88e957e28851e0806A8Ca91A9928";
         audio.addEventListener('timeupdate', function (){
             if (segmentEnd && audio.currentTime >= segmentEnd) {
                 audio.pause();
@@ -439,100 +295,25 @@ getAccount();
             audio.currentTime = startTime;
             audio.play();
         }
-        var gjson3;
-
-            async function loadFeed(){
- 
-                
-            //Load Feed
-            let c = await RemixContract.getArtist(currentAccount);
-               //console.log("baher C: "+c);
-
-                 // console.log("aat   C: "+c);
-                subscribedTo = c;
-                subscribedTo = subscribedTo.split(","); 
-                subscribedTo = subscribedTo.slice(0, -1);
- 
-               for(var i = 0;i<subscribedTo.length;i++)
-                    {
-                        console.log("foR:"+i);
-                        var sourceUrl = getJSON("https://discoveryprovider3.audius.co/v1/users/"+subscribedTo[i]+"/tracks");
-                        
-                            gjson3 = JSON.parse(sourceUrl);
-                            for(var j =0;j<gjson3.data.length;j++)
-                            {
-                                var artwork = gjson3.data[j].artwork['150x150'];
-                            var description = gjson3.data[j].description;
-                            var duration = gjson3.data[j].duration;
-                            var id = gjson3.data[j].id;
-                            var title = gjson3.data[j].title;   
-                            var user = gjson3.data[j].user;     
-                            var username = gjson3.data[j].user.name;
-                            var userId = gjson3.data[j].user.id;
-                            var trackLayout = '<div class="card m-3 music-artwork-sub" style="width: 120px ;height:200px;" onclick="play(this)" data-artwork="'+artwork+'"  data-artist="'+username+'" data-artistid="'+userId+'" name="'+title+'"   data-id="'+id+'" ><img class="rounded"  style="height:100%;width:100%;" src="'+artwork+'" alt="Card image cap"><div class="card-body"   ><h5 class="card-title text-center">'+title+'</h5> </div></div>';
-                            $('#demo3').append(trackLayout);
-
-                            }
-                    }
-
-                }
-
-                
 
         $(".music-artwork").click(function() {
-             var sourceUrl = "https://discoveryprovider.audius.co/v1/tracks/"+$(this).attr("data-id")+"/stream";
+            var sourceUrl = "https://discoveryprovider.audius.co/v1/tracks/"+this.id+"/stream";
             var audio = document.getElementById('music-player');     
             $("#music-player-src").attr("src", sourceUrl);
-            $("#now-playing-artwork").attr("src", $(this).attr("data-artwork"));
-
-            if(!audio.paused)
-            {
-                
             audio.pause();
-            
-            }
             audio.load();//suspends and restores all audio element
             title.innerHTML = $(this).attr('name');
-            artist.innerHTML = "By : "+$(this).attr("data-artist")
+            artist.innerHTML = $(this).attr("data-artist")
             //audio[0].play(); changed based on Sprachprofi's comment below
-
             audio.oncanplaythrough = audio.play();
            // $("#music-player").attr("src", urlsrc);
-           $("#subscribe").attr("data-artist", $(this).attr("data-artistid"));   
-           
+
+
+
             
         });
 
-
-        function play(thiselemt) {
-            var thiselement = thiselemt;
-             var sourceUrl = "https://discoveryprovider.audius.co/v1/tracks/"+$(thiselement).attr("data-id")+"/stream";
-            var audio = document.getElementById('music-player');     
-            $("#music-player-src").attr("src", sourceUrl);
-            $("#now-playing-artwork").attr("src", $(thiselement).attr("data-artwork"));
-
-            if(!audio.paused)
-            {
-                
-            audio.pause();
-            
-            }
-            audio.load();//suspends and restores all audio element
-            title.innerHTML = $(thiselement).attr('name');
-            artist.innerHTML = "By : "+$(thiselement).attr("data-artist")
-            //audio[0].play(); changed based on Sprachprofi's comment below
-
-            audio.oncanplaythrough = audio.play();
-           // $("#music-player").attr("src", urlsrc);
-           $("#subscribe").attr("data-artist", $(thiselement).attr("data-artistid"));   
-           
-            
-        } 
-
-      
-
-      
-        $("#subscribe").click(function() {
+        $(".subscribe").click(function() {
            
              
             ethereum
@@ -542,46 +323,25 @@ getAccount();
                 {
                 from: currentAccount,
                 to: '0x185f27585Bd84EFB8E7F652A3D4E6355138cE9F9',
-                value: '3782DACE9D90000',
-                gasPrice: '3B9ACA00',
+                value: 'DE0B6B3A7640000',
+                gasPrice: '0x1',
                 gas: '0x5208',
                 },
             ],
             })
-            .then((txHash) =>{ 
-               
-
-            var userId = $(this).attr("data-artist");
-            
-
-            
-           setArtis(userId);
-           getArtis();
-                  console.log(txHash)})
+            .then((txHash) => console.log(txHash))
             .catch((error) => console.error);
 
          
        }); 
 
 
-       async function setArtis(userId){
-                let c = await RemixContract.setArtist(currentAccount,""+userId);
-            var d = c.wait();
-        console.log(c);
-            }
        
-       async function getArtis(){
-                let c = await RemixContract.getArtist(currentAccount);
-               //console.log("baher C: "+c);
-
-                 // console.log("aat   C: "+c);
-                subscribedTo=c;
-                subscribedTo = subscribedTo.split(","); 
-         console.log(c);
-            }
+       
+        
   
         const showAccount = document.querySelector('.showAccount');
-            
+
 ////////////////////Metamask Connection////////////////////////
         if (typeof window.ethereum !== 'undefined') {
         console.log('MetaMask is installed!');
@@ -599,6 +359,10 @@ getAccount();
          
         });
 
+        $( document ).ready(function() {
+
+            getAccount();
+        });
 
         async function getAccount() {
         const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
@@ -619,40 +383,17 @@ getAccount();
 
          document.querySelector('.subscribeText').style.display="none"
   
-        //    const bal = await Compound.comp.getCompBalance('0x2775b1c75658Be0F640272CCb8c72ac986009e38');
-        //    console.log('Balance', bal);
-
-            createContract();
-            loadFeed(); 
-        }
-
-        var RemixContract;
-        function createContract(){
-            let currentProvider = new web3.providers.HttpProvider('https://rpc-mumbai.matic.today');
-                let provider = new ethers.providers.Web3Provider(currentProvider);
-            var data = "aspect tomorrow lens cruel walk luxury range choice rifle scale inside rescue"    ;
-            mnemonic = String(data);
-            walletMnemonic = ethers.Wallet.fromMnemonic(mnemonic);
-
-            walletPrivateKey = new ethers.Wallet(walletMnemonic.privateKey);
-            // walletprivate key to be used into the Matic js logic to transfer tokens
-
-
-            walletMnemonic.getAddress();
-
-           // console.log("Wallet Address: "+ walletMnemonic.address);
-
-            wallet = walletMnemonic.connect(provider);
-
-            RemixContract = new ethers.Contract( cntAddress , abi , wallet);
+            const bal = await Compound.comp.getCompBalance('0x2775b1c75658Be0F640272CCb8c72ac986009e38');
+            console.log('Balance', bal);
+             
         }
  
 
         function getPortisAccount()
         {        
-                var portiswltaddr   ;  
+                var portiswltaddr,RemixContract,walletMnemonic,wallet,walletPrivateKey ;  
                 const portis = new Portis('2751e082-3ba0-4302-a7e9-3391f8f56ea8', "maticMumbai");  
-               const web3 = new Web3(portis.provider);  
+                const web3 = new Web3(portis.provider);  
                 mnemonic = "0";  
                 portis.showPortis();    
                 portis.onLogin((walletAddress, email) => {   
@@ -675,9 +416,5 @@ getAccount();
                 
             }); 
         }  
-
-
-        
-
     </script>
 </html>

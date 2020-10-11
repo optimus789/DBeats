@@ -158,13 +158,13 @@ audio::-webkit-media-controls-play-button,
                
          <p class="account text-center  mt-3" style="display: none;">Account: <span class="showAccount"></span></p>
          
-        <h1 class="text-center  mt-3 shadow-img" style="filter: drop-shadow(0 0 0.9rem #16E9E5)!important; color: #FFF;">Trending Tracks</h1>
+        <h1 class="text-center  mt-3 shadow-img" style="filter: drop-shadow(0 0 0.9rem #16E9E5)!important;">Trending Tracks</h1>
 
         <div id="demo"  style="padding-bottom:50px; " > 
         
         </div>
 
-        <h1 class="text-center  my-3  " style="  filter: drop-shadow(0 0 0.9rem #16E9E5)!important; color: #FFF;">Your Feed</h1>
+        <h1 class="text-center  my-3  " style="  filter: drop-shadow(0 0 0.9rem #16E9E5)!important;">Your Feed</h1>
 
         <div id="demo3"  style="margin-bottom:50px; " > 
 

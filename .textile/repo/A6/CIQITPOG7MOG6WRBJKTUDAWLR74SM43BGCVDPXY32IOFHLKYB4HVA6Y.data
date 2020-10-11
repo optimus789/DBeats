@@ -32,8 +32,7 @@ color: white;
 
 h1{
   font-family: "evil";
-color: #FFF; 
-
+color: #2A9DFF;
 }
 
 .card-title{
@@ -65,20 +64,20 @@ color: white;
 }
 
 .shadow-img{
-  filter: drop-shadow(0 0 0.55rem #16E9E5)!important;
+  filter: drop-shadow(0 0 0.55rem #2a9dff)!important;
 
 }
 .fixed-bottom /* position fixed Bottom */{position:fixed;bottom:0px;top:auto;}
 
 
 #subscribe{
-  background-color: #16E9E5; 
+  background-color: #2a9dff; 
   color: #FFF; 
 
 }
 
 #subscribe:hover{ 
-  background-color: #16E9E5;
+  background-color: #2a9dff;
   animation-name: example;
   animation-duration: 4s;
   color: #FFF; 

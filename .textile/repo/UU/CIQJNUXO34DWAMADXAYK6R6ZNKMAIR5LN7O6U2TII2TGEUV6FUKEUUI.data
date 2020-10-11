@@ -32,8 +32,7 @@ color: white;
 
 h1{
   font-family: "evil";
-color: #FFF; 
-
+color: #2A9DFF;
 }
 
 .card-title{
@@ -63,44 +62,6 @@ color: white;
   filter: drop-shadow(0 0.45rem 0.2rem rgba(102, 102, 102, 0.5));
 
 }
-
-.shadow-img{
-  filter: drop-shadow(0 0 0.55rem #16E9E5)!important;
-
-}
 .fixed-bottom /* position fixed Bottom */{position:fixed;bottom:0px;top:auto;}
 
-
-#subscribe{
-  background-color: #16E9E5; 
-  color: #FFF; 
-
-}
-
-#subscribe:hover{ 
-  background-color: #16E9E5;
-  animation-name: example;
-  animation-duration: 4s;
-  color: #FFF; 
-}   
-@keyframes example {
-  0%   {background-color: #0093E9;}
-  25%  {background-color: #80D0C7;}
-  50%  {background-color: #5ee6e8;}
-  100% {background-color: #2a9dff;}
-}
-
-
-
-@-webkit-keyframes rotating {
-  from{
-  -webkit-transform: rotate(0deg);
-  }
-  to{
-  -webkit-transform: rotate(360deg);
-  }
-}
-
-.rotating {
-  -webkit-animation: rotating 6s linear infinite;
-}
+   

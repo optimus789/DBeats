@@ -26,7 +26,7 @@
 
 audio::-webkit-media-controls-play-button,
                 audio::-webkit-media-controls-panel {
-                background-color: rgba(255, 255, 255, 0.1);
+                background-color: #FFF;
                 color: #000;
                 }
             #music-player {
@@ -158,13 +158,13 @@ audio::-webkit-media-controls-play-button,
                
          <p class="account text-center  mt-3" style="display: none;">Account: <span class="showAccount"></span></p>
          
-        <h1 class="text-center  mt-3 shadow-img" style="filter: drop-shadow(0 0 0.9rem #16E9E5)!important; color: #FFF;">Trending Tracks</h1>
+        <h1 class="text-center  mt-3">Trending Tracks</h1>
 
         <div id="demo"  style="padding-bottom:50px; " > 
         
         </div>
 
-        <h1 class="text-center  my-3  " style="  filter: drop-shadow(0 0 0.9rem #16E9E5)!important; color: #FFF;">Your Feed</h1>
+        <h1 class="text-center  my-3">Your Feed</h1>
 
         <div id="demo3"  style="margin-bottom:50px; " > 
 
@@ -230,10 +230,8 @@ audio::-webkit-media-controls-play-button,
 <br>
 
 
-        <div class="now-playing fixed-bottom  mx-5  px-5 py-3  card shadow"  style="border-radius: 50px 50px 0px 0px ;
-        filter: drop-shadow(0.0rem -0.25rem 0.2rem rgba(102, 102, 102, 0.3));background-color: #ffffff;
-background-image: linear-gradient(180deg, #ffffff 0%, #ffffff 90%, #16E9E5 100%);
-"> 
+        <div class="now-playing fixed-bottom  mx-5  px-5 py-3  card shadow"  style="   border-radius: 50px 50px 0px 0px ;
+        filter: drop-shadow(0.0rem -0.25rem 0.2rem rgba(102, 102, 102, 0.3));"> 
             <div class="row">
 
                 <div class="col-sm-2">
@@ -493,7 +491,7 @@ getAccount();
             }
             audio.load();//suspends and restores all audio element
             title.innerHTML = $(this).attr('name');
-            artist.innerHTML = "By : "+$(this).attr("data-artist")
+            artist.innerHTML = $(this).attr("data-artist")
             //audio[0].play(); changed based on Sprachprofi's comment below
 
             audio.oncanplaythrough = audio.play();
@@ -519,7 +517,7 @@ getAccount();
             }
             audio.load();//suspends and restores all audio element
             title.innerHTML = $(thiselement).attr('name');
-            artist.innerHTML = "By : "+$(thiselement).attr("data-artist")
+            artist.innerHTML = $(thiselement).attr("data-artist")
             //audio[0].play(); changed based on Sprachprofi's comment below
 
             audio.oncanplaythrough = audio.play();

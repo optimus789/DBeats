@@ -362,7 +362,7 @@ getAccount();
 
         }
 
-       
+       var subscribed = false;
         var audio = document.getElementById('music-player');
         
         var source = document.getElementById('music-player-src');
@@ -427,7 +427,7 @@ getAccount();
                 audio.pause();
             }   
             console.log(audio.currentTime);
-            if(audio.currentTime>10)
+            if(!subscribed&&audio.currentTime>10)
             {
                 audio.pause(); 
                 $.notify({
@@ -485,7 +485,9 @@ getAccount();
                 
 
         $(".music-artwork").click(function() {
-             var sourceUrl = "https://discoveryprovider.audius.co/v1/tracks/"+$(this).attr("data-id")+"/stream";
+
+
+            var sourceUrl = "https://discoveryprovider.audius.co/v1/tracks/"+$(this).attr("data-id")+"/stream";
             var audio = document.getElementById('music-player');     
             $("#music-player-src").attr("src", sourceUrl);
             $("#now-playing-artwork").attr("src", $(this).attr("data-artwork"));
@@ -503,13 +505,20 @@ getAccount();
 
             audio.oncanplaythrough = audio.play();
            // $("#music-player").attr("src", urlsrc);
-           $("#subscribe").attr("data-artist", $(this).attr("data-artistid"));   
-           
+           $("#subscribe").attr("data-artist", $(this).attr("data-artistid")); 
+
+            if(!$.inArray($(this).attr("data-artistid"),subscribedTo))
+            {
+                //alert($(this).attr("data-artistid"));
+                subscribed = true;
+                $("#subscribe").attr("style", "display:none"); 
+            }
             
         });
 
 
         function play(thiselemt) {
+            subscribed = true;
             var thiselement = thiselemt;
              var sourceUrl = "https://discoveryprovider.audius.co/v1/tracks/"+$(thiselement).attr("data-id")+"/stream";
             var audio = document.getElementById('music-player');     

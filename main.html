@@ -356,7 +356,7 @@ getAccount();
                 var userId = gjson2.data[i].user.id;
                 var trackLayout = '<div class="card m-3 music-artwork rounded-circle" style="width: 150px;height:200px;" data-artwork="'+artwork+'" data-artist="'+username+'" data-artistid="'+userId+'" name="'+title+'"   data-id="'+id+'" ><img class="rounded-circle"  style="height:100%;width:100%;" src="'+artwork+'" alt="Card image cap"><div class="card-body rounded-circle"   ><h5 class="card-title text-center">'+title+'</h5> </div></div>';
                 $('#demo').append(trackLayout);
-                console.log(i);    
+                //console.log(i);    
 
         }
 
@@ -458,6 +458,7 @@ getAccount();
                 subscribedTo = c;
                 subscribedTo = subscribedTo.split(","); 
                 subscribedTo = subscribedTo.slice(0, -1);
+                console.log(subscribedTo);
  
                for(var i = 0;i<subscribedTo.length;i++)
                     {

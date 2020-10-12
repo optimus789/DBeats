@@ -15,26 +15,30 @@
 
 .evil{
   font-family: "evil";
+
 }
 .gont{
   font-family: "gont";
+
 }
 .halaney{
   font-family: "halaney";
+
 }
 h3{
   font-family: "evil";
-  color: white;
+color: white;
 }
 
 h1{
   font-family: "evil";
-  color: #FFF; 
+color: #FFF; 
+
 }
 
 .card-title{
   font-family: "gont";
-  color: white;
+color: white;
 }
 .stay-tuned{
   background-image: linear-gradient(to right, #802392 , #ea8ffc);
@@ -61,16 +65,15 @@ h1{
 }
 
 .shadow-img{
-  filter: drop-shadow(0 0 0.55rem #fff)!important;
+  filter: drop-shadow(0 0 0.55rem #16E9E5)!important;
 
 }
 .fixed-bottom /* position fixed Bottom */{position:fixed;bottom:0px;top:auto;}
 
 
-#subscribe{ 
-  background-image: linear-gradient(to left, #FFF , #FFF);
-
-  color: #000; 
+#subscribe{
+  background-color: #16E9E5; 
+  color: #FFF; 
 
 }
 
@@ -78,9 +81,8 @@ h1{
   background-color: #16E9E5;
   animation-name: example;
   animation-duration: 1s;
-  color: #16E9E5; 
+  color: #FFF; 
 }   
-
 @keyframes example {
   0%   {background-color: #0093E9;}
   25%  {background-color: #80D0C7;}

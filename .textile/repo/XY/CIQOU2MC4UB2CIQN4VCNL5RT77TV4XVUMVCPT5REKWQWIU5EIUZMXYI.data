@@ -15,26 +15,30 @@
 
 .evil{
   font-family: "evil";
+
 }
 .gont{
   font-family: "gont";
+
 }
 .halaney{
   font-family: "halaney";
+
 }
 h3{
   font-family: "evil";
-  color: white;
+color: white;
 }
 
 h1{
   font-family: "evil";
-  color: #FFF; 
+color: #FFF; 
+
 }
 
 .card-title{
   font-family: "gont";
-  color: white;
+color: white;
 }
 .stay-tuned{
   background-image: linear-gradient(to right, #802392 , #ea8ffc);

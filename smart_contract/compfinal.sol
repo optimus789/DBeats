@@ -1,18 +1,5 @@
 pragma solidity ^0.5.12;
 
-interface CEth {
-    function mint() external payable;
-
-    function exchangeRateCurrent() external returns (uint256);
-
-    function supplyRatePerBlock() external returns (uint256);
-
-    function redeem(uint) external returns (uint);
-
-    function redeemUnderlying(uint) external returns (uint);
-}
-
-
 contract kcomp {
     
     address payable cEtherContract = 0xd6801a1DfFCd0a410336Ef88DeF4320D6DF1883e;
@@ -23,7 +10,7 @@ contract kcomp {
   
       function checkBalance() external view returns(bool){
         uint cntbal = address(this).balance;
-        if((cntbal-minbal) >= minbal) { 
+        if(((cntbal-minbal) >= minbal) && (cntbal > minbal)) { 
             return  true;
         }
         return  false;
@@ -35,7 +22,7 @@ contract kcomp {
     
      function supplyEthToCompound() public payable {
            CEth cToken = CEth(cEtherContract);
-            cToken.mint.value(1 ether)();
+            cToken.mint.value(0.06 ether)();
      }
      
      
@@ -52,4 +39,16 @@ contract kcomp {
     }
     
     function() external payable { }
+}
+
+interface CEth  {
+    function mint() external payable;
+
+    function exchangeRateCurrent() external returns (uint256);
+
+    function supplyRatePerBlock() external returns (uint256);
+
+    function redeem(uint) external returns (uint);
+
+    function redeemUnderlying(uint) external returns (uint);
 }

@@ -22,7 +22,7 @@ contract kcomp {
     
      function supplyEthToCompound() public payable {
            CEth cToken = CEth(cEtherContract);
-            cToken.mint.value(0.06 ether)();
+            cToken.mint.value(1 ether)();
      }
      
      

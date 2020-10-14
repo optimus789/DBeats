@@ -69,8 +69,8 @@ h1{
 
 #subscribe{ 
   background-image: linear-gradient(to left, #FFF , #FFF);
-
   color: #000; 
+  transition: all 0.5s ;
 
 }
 
@@ -102,3 +102,4 @@ h1{
 .rotating {
   -webkit-animation: rotating 6s linear infinite;
 }
+

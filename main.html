@@ -452,9 +452,7 @@ getAccount();
                 
             //Load Feed
             let c = await RemixContract.getArtist(currentAccount);
-               //console.log("baher C: "+c);
-
-                 // console.log("aat   C: "+c);
+              
                 subscribedTo = c;
                 subscribedTo = subscribedTo.split(","); 
                 subscribedTo = subscribedTo.slice(0, -1);

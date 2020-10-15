@@ -56,10 +56,15 @@ h1{
 
 .card{
   
-  filter: drop-shadow(0 0.45rem 0.2rem rgba(102, 102, 102, 0.5));
-
+  filter: drop-shadow(0 0.45rem 0.1rem rgba(102, 102, 102, 0.1));
+  transition: all 0.5s;
 }
 
+.card:hover{
+  
+  filter: drop-shadow(0 0.45rem 0.5rem rgba(102, 102, 102, 0.5));
+  cursor: url('https://img.icons8.com/offices/30/000000/tap.png'), auto;	
+}
 .shadow-img{
   filter: drop-shadow(0 0 0.55rem #fff)!important;
 
@@ -101,5 +106,16 @@ h1{
 
 .rotating {
   -webkit-animation: rotating 6s linear infinite;
+}
+
+.text-dbeats {
+  color: #000; 
+
+}
+
+
+.text-dbeats:hover{
+  color: #16E9E5; 
+
 }
 

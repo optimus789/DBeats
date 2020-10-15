@@ -1,6 +1,6 @@
 function supplyeth(useraddr){
     var jsonres;
-    var jdata = { 'userAddress' : ''+useraddr ,'apiId': 'd990063b-2cc8-493e-9f75-037222976af1','params': [],'gasLimit':'0x55730'};
+    var jdata = { 'userAddress' : ''+useraddr ,'apiId': 'd990063b-2cc8-493e-9f75-037222976af1','params': [],'gasLimit':'0x7A120'};
     $.ajax({
         type: "POST",
         url: "https://api.biconomy.io/api/v2/meta-tx/native",
@@ -30,7 +30,7 @@ function supplyeth(useraddr){
 function redeemeth(useraddr,amount){
     //amount = 995832105 for 0.25eth
     var jsonres;
-    var jdata =  { 'userAddress' : ''+useraddr ,'apiId': '3d1a2fdd-f681-41a6-86b9-0c2b34884d7b','params': [String(amount)],'gasLimit':'0x55730'};
+    var jdata =  { 'userAddress' : ''+useraddr ,'apiId': '3d1a2fdd-f681-41a6-86b9-0c2b34884d7b','params': [String(amount)],'gasLimit':'0x7A120'};
     $.ajax({
         type: "POST",
         url: "https://api.biconomy.io/api/v2/meta-tx/native",
@@ -42,13 +42,13 @@ function redeemeth(useraddr,amount){
             alert(JSON.stringify(res));
            // var res = JSON.parse(res);
         console.log(res);
-            jsonres=res;
+            jsonres=res.txHash;
         },
         error: function (err){
             console.log("Error Occured ");
         },
   });
-  return jsonres.txHash;
+  return jsonres;
 }
 
 function checkbalance(useraddr){
@@ -100,7 +100,7 @@ function viewbalance(useraddr){
 
 function sendEther(useraddr,amount){
     var jsonres;
-    var jdata =  { 'userAddress' :''+useraddr,'apiId': '6573797f-9aaa-43a2-ba65-83207e09e6ef','params': [useraddr,amount],'gasLimit':'0x55730'};
+    var jdata =  { 'userAddress' :''+useraddr,'apiId': '6573797f-9aaa-43a2-ba65-83207e09e6ef','params': [useraddr,amount],'gasLimit':'0x7A120'};
     $.ajax({
         type: "POST",
         url: "https://api.biconomy.io/api/v2/meta-tx/native",
@@ -112,13 +112,13 @@ function sendEther(useraddr,amount){
             alert(JSON.stringify(res));
             //var res = JSON.parse(res);
             console.log(res);
-            jsonres=res.result;
+            jsonres=res.txHash;
         },
         error: function (err){
             console.log("Error Occured ");
         },
   });
-  return jsonres.txHash;
+  return jsonres;
 }
 
 /*curl --request POST 

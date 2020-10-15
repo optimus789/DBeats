@@ -657,7 +657,7 @@ getAccount();
                 console.log("Supply Eth hash: ",txhash);
             }
                 console.log(c);
-                loadFeed();
+                setTimeout(function(){ loadFeed();}, 5000);
             }
 
        async function getArtis(){

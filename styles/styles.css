@@ -27,6 +27,10 @@ h3{
   color: white;
 }
 
+.overlaytxt {
+  font-family: "evil";
+}
+
 h1{
   font-family: "evil";
    font-size: 4rem;

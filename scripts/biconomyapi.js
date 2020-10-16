@@ -30,7 +30,7 @@ function supplyeth(useraddr){
 function redeemeth(useraddr,amount){
     //amount = 995832105 for 0.25eth
     var jsonres;
-    var jdata =  { 'userAddress' : ''+useraddr ,'apiId': '3d1a2fdd-f681-41a6-86b9-0c2b34884d7b','params': [String(amount)],'gasLimit':'0x7A120'};
+    var jdata =  { 'userAddress' : ''+useraddr ,'apiId': '3d1a2fdd-f681-41a6-86b9-0c2b34884d7b','params': [amount],'gasLimit':'0x7A120'};
     $.ajax({
         type: "POST",
         url: "https://api.biconomy.io/api/v2/meta-tx/native",

@@ -21,6 +21,7 @@
 <script src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script>
 
 
+
 <link rel="stylesheet" href="https://unpkg.com/kursor/dist/kursor.css">
 <link href="styles/styles.css" rel="stylesheet">
 <style>
@@ -194,9 +195,10 @@ Artist
 <script src="script.js"></script>
 <script src="scripts/animation.js"></script>
 <script src="scripts/biconomyapi.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js" type="text/javascript"></script> 
 <script> 
     
-    const compound = new Compound(window.ethereum);
+    //const compound = new Compound(window.ethereum);
 
    /*(async function() {
 
@@ -207,7 +209,7 @@ Artist
     })().catch(console.error);    
 
 */
-
+var web;
 
 
    
@@ -631,9 +633,69 @@ getAccount();
 ];
 
 
+
+    async function sendTx() {
+                        //const accounts = await web3.eth.personal.getAccounts();
+
+                        const tx = web3.eth
+                            .sendTransaction({
+                            from: currentAccount,
+                            to: '0xa1aE1189b1131dDF7c155EA77Bb8dAe48b561fc4',
+                            value: web3.utils.toWei("0.25", "ether"),
+                            gasPrice: '0xC570BD200',
+                            gas: '0x9C40',
+                            })
+                            .on("transactionHash", txHash => {
+                            // web3.currentProvider.send("evm_mine"); // execution of it seems to be blocked by sendTransaction in beta52
+                            console.log("Payment transactionHash", txHash);
+                            })
+                            .on("receipt", receipt => {
+
+                            console.log("on receipt");
+                            })
+                            .on("error", error => {
+                            console.log("on error", error);
+                            });
+
+                        const receipt = await tx;
+                        return receipt;
+                        }
+
         $("#subscribe").click(function() {
            
-            ethereum.request({
+           
+                                $.LoadingOverlay("show", {
+                                    image       : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle r="80" cx="500" cy="90"/><circle r="80" cx="500" cy="910"/><circle r="80" cx="90" cy="500"/><circle r="80" cx="910" cy="500"/><circle r="80" cx="212" cy="212"/><circle r="80" cx="788" cy="212"/><circle r="80" cx="212" cy="788"/><circle r="80" cx="788" cy="788"/></svg>',
+                                    text        : "Waiting for confirmation",
+                                    textClass : "overlaytxt",
+                                    textResizeFactor: 0.4
+                                });
+
+                sendTx()
+                .then(receipt => {
+                    console.log("Got receipt");
+                    $.LoadingOverlay("text", "Transaction Confirmed, Enjoy your songs", {
+                        textClass : "overlaytxt"
+                    });
+                    setTimeout(function(){
+                        $.LoadingOverlay("hide");;
+                    }, 1000);
+                    
+                    
+                    var userId = $(this).attr("data-artist");
+                    
+                    setArtis(userId);
+                    getArtis();
+                    
+
+                })
+                .catch(error =>{
+                    console.log("Got error:", error);
+                    $.LoadingOverlay("hide");
+                } );
+
+                        
+            /*ethereum.request({
             method: 'eth_sendTransaction',
             params: [
                 {
@@ -655,7 +717,7 @@ getAccount();
            setArtis(userId);
            getArtis();
                   console.log(txHash)})
-            .catch((error) => console.error);
+            .catch((error) => console.error);*/
 
          
        });
@@ -697,10 +759,33 @@ getAccount();
             
         async function delArtis(artistId){
                 console.log(artistId);
-                txhash = redeemeth(currentAccount,995832105);
-                console.log("Redeen Eth in progress hash: ",txhash);
-                txhash = sendEther(currentAccount,250000000000000000);
+                //balance = viewbalance(currentAccount);
+                //console.log(balance);
+                txhash = redeemeth(currentAccount,985832105).catch(function(error){
+                    redeemeth(currentAccount,985832105);
+                });
+                console.log("Redeem Eth in progress hash: ",txhash);
+               
+                txhash = sendEther(currentAccount,250000000000000000).catch(function(error){
+                    sendEther(currentAccount,985832105);
+                });;
                 console.log("Your transaction is being processed : ",txhash);
+                var receipt = web3.eth.getTransactionReceipt(txhash)
+                .then(console.log).catch(console.error);
+
+/* {
+  "status": true,
+  "transactionHash": "0x9fc76417374aa880d4449a1f7f31ec597f00b1f6f3dd2d66f4c9c6c445836d8b",
+  "transactionIndex": 0,
+  "blockHash": "0xef95f2f1ed3ca60b048b4bf67cde2195961e0bba6f70bcbea9a2c4e133e34b46",
+  "blockNumber": 3,
+  "contractAddress": "0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe",
+  "cumulativeGasUsed": 314159,
+  "gasUsed": 30234,
+  "logs": [{
+         // logs as returned by getPastLogs, etc.
+     }, ...]
+}*/
                 let c = await RemixContract.findArtist(currentAccount,artistId);
                 //console.log("baher C: "+c);
 
@@ -728,7 +813,6 @@ getAccount();
         ethereumButton.addEventListener('click', () => {
         //Will Start the metamask extension
         getAccount();
-
          
         });
 
@@ -755,7 +839,16 @@ getAccount();
   
         //    const bal = await Compound.comp.getCompBalance('0x2775b1c75658Be0F640272CCb8c72ac986009e38');
         //    console.log('Balance', bal);
+        const OPTIONS = {
+        defaultBlock: "latest",
+        };
 
+        web3 = new Web3(
+        window.ethereum,
+        // Web3.providers.HtttpProvider("http://localhost:8545")
+        null,
+        OPTIONS
+        );
             createContract();
             loadFeed(); 
         }

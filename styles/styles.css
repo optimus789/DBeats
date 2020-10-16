@@ -29,8 +29,14 @@ h3{
 
 h1{
   font-family: "evil";
-  color: #FFF; 
-}
+   font-size: 4rem;
+   color: #16E9E5;
+ }
+.music-artwork:hover h1{
+  filter: drop-shadow(0 0 0.9rem #16E9E5)!important; 
+  -webkit-text-stroke: 1px #16E9E5; color: #FFF;
+  transition: all 1s ease-out;
+} 
 
 .card-title{
   font-family: "gont";
@@ -54,23 +60,32 @@ h1{
   transform: translate(-50%, -50%);
   }
 
-.card{
+.music-artwork-sub,.music-artwork{
   
-  filter: drop-shadow(0 0.45rem 0.1rem rgba(102, 102, 102, 0.1));
-  transition: all 0.5s;
+  filter: drop-shadow(0 0.15rem 0.1rem rgba(102, 102, 102, 0.1));
+  transition: filter 0.5s;
 }
-
-.card:hover{
+.music-artwork:hover,
+.music-artwork-sub:hover{
   
   filter: drop-shadow(0 0.45rem 0.5rem rgba(102, 102, 102, 0.5));
-  cursor: url('https://img.icons8.com/offices/30/000000/tap.png'), auto;	
+ 
+  border: 2px solid #16E9E5;
 }
 .shadow-img{
   filter: drop-shadow(0 0 0.55rem #fff)!important;
 
 }
 .fixed-bottom /* position fixed Bottom */{position:fixed;bottom:0px;top:auto;}
+ 
+body {  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+/* Add the blur effect */
 
+  background-repeat: no-repeat;  
+transition: all 0.5s;
+} 
 
 #subscribe{ 
   background-image: linear-gradient(to left, #FFF , #FFF);

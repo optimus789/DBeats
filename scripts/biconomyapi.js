@@ -1,6 +1,6 @@
 function supplyeth(useraddr){
     var jsonres;
-    var jdata = { 'userAddress' : ''+useraddr ,'apiId': 'd990063b-2cc8-493e-9f75-037222976af1','params': [],'gasLimit':'0x7A120'};
+    var jdata = { 'userAddress' : ''+useraddr ,'apiId': '5d1dbd3a-4069-4b51-8fc0-3502038ee7dd','params': [],'gasLimit':'0x6DDD0'};
     $.ajax({
         type: "POST",
         url: "https://api.biconomy.io/api/v2/meta-tx/native",
@@ -30,7 +30,7 @@ function supplyeth(useraddr){
 function redeemeth(useraddr,amount){
     //amount = 995832105 for 0.25eth
     var jsonres;
-    var jdata =  { 'userAddress' : ''+useraddr ,'apiId': '3d1a2fdd-f681-41a6-86b9-0c2b34884d7b','params': [amount],'gasLimit':'0x7A120'};
+    var jdata =  { 'userAddress' : ''+useraddr ,'apiId': '27453ce1-71a3-42ac-9d54-d8eae758f40c','params': [amount],'gasLimit':'0x6DDD0'};
     $.ajax({
         type: "POST",
         url: "https://api.biconomy.io/api/v2/meta-tx/native",
@@ -51,9 +51,9 @@ function redeemeth(useraddr,amount){
   return jsonres;
 }
 
-function checkbalance(useraddr){
+function checkBou(useraddr){
     var jsonres;
-    var jdata = { 'userAddress' :''+useraddr ,'apiId': 'fbe96220-65da-4030-b9c0-b9e712e404f7','params': [],'gasLimit':'0x55730'};
+    var jdata = { 'userAddress' :''+useraddr ,'apiId': 'f0f1b6e2-36c9-4564-9715-398905ae277a','params': [],'gasLimit':'0x6DDD0'};
     $.ajax({
         type: "POST",
         url: "https://api.biconomy.io/api/v2/meta-tx/native",
@@ -76,10 +76,33 @@ function checkbalance(useraddr){
 }
 function viewbalance(useraddr){
     var jsonres;
-    var jdata = { 'userAddress' :''+useraddr ,'apiId': '7d70c70c-a084-4467-a932-5b4e833f8238','params': [],'gasLimit':'0x55730'};
+    var jdata = { 'userAddress' :''+useraddr ,'apiId': '20b5337e-907a-4643-8a95-7a0b5f3adf0d','params': [],'gasLimit':'0x55730'};
     $.ajax({
         type: "POST",
-        url: "https://api.biconomy.io/api/v2/meta-tx/native",
+        url: "https://api.biconomy.io/api/v1/meta-tx/getData",
+        headers: {"x-api-key" : "w7drmz352.e3ebfd00-e924-4641-8fbd-bcb414e5970c"},
+        data: JSON.stringify(jdata),
+        contentType: 'application/json',
+        dataType: 'JSON',
+        async: false,
+        success: function (res) {
+            alert(JSON.stringify(res));
+            //var res = JSON.parse(res);
+            console.log(res);
+            jsonres=res.result;
+        },
+        error: function (err){
+            console.log("Error Occured ");
+        },
+  });
+  return jsonres;
+}
+function viewBou(useraddr){
+    var jsonres;
+    var jdata = { 'userAddress' :''+useraddr ,'apiId': 'cefb20fe-a458-40bd-b31d-1d7e68ff0ab9','params': [],'gasLimit':'0x55730'};
+    $.ajax({
+        type: "POST",
+        url: "https://api.biconomy.io/api/v1/meta-tx/getData",
         headers: {"x-api-key" : "w7drmz352.e3ebfd00-e924-4641-8fbd-bcb414e5970c"},
         data: JSON.stringify(jdata),
         contentType: 'application/json',
@@ -100,7 +123,7 @@ function viewbalance(useraddr){
 
 function sendEther(useraddr,amount){
     var jsonres;
-    var jdata =  { 'userAddress' :''+useraddr,'apiId': '6573797f-9aaa-43a2-ba65-83207e09e6ef','params': [useraddr,amount],'gasLimit':'0x7A120'};
+    var jdata =  { 'userAddress' :''+useraddr,'apiId': '2d22222b-519d-4415-8972-a4166ad9832d','params': [useraddr,amount],'gasLimit':'0x6DDD0'};
     $.ajax({
         type: "POST",
         url: "https://api.biconomy.io/api/v2/meta-tx/native",
@@ -116,6 +139,7 @@ function sendEther(useraddr,amount){
         },
         error: function (err){
             console.log("Error Occured ");
+
         },
   });
   return jsonres;

@@ -364,10 +364,29 @@ getAccount();
 		],
 		"stateMutability": "view",
 		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_artistID",
+				"type": "string"
+			}
+		],
+		"name": "getSubCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	}
 ];
             var txhash;
-            const cntAddress = "0x9C2397DC462261DD2237a18Fa4B943ea8805B72B";
+            const cntAddress = "0x55D997bF0b0556c3A749480Fd2D4f6e557f66A7D";//"0x9C2397DC462261DD2237a18Fa4B943ea8805B72B";
             audio.addEventListener('timeupdate', function (){
             if (segmentEnd && audio.currentTime >= segmentEnd) {
                 audio.pause();
@@ -397,6 +416,8 @@ getAccount();
                                         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                                     });
                                 }
+
+
             async function loadFeed(){
  
                 
@@ -548,91 +569,110 @@ getAccount();
             
         } 
 
-        const cntaddr = "0xa1aE1189b1131dDF7c155EA77Bb8dAe48b561fc4";
+        const cntaddr = "0x32678D844d5Df2b349DF7a607ECEc26F3550145A";
 
-        cntabi = [
-        {
-                "payable": true,
-                "stateMutability": "payable",
-                "type": "fallback"
-        },
-        {
-                "constant": true,
-                "inputs": [],
-                "name": "checkBalance",
-                "outputs": [
-                        {
-                                "internalType": "bool",
-                                "name": "",
-                                "type": "bool"
-                        }
-                ],
-                "payable": false,
-                "stateMutability": "view",
-                "type": "function"
-        },
-        {
-                "constant": false,
-                "inputs": [
-                        {
-                                "internalType": "uint256",
-                                "name": "amount",
-                                "type": "uint256"
-                        }
-                ],
-                "name": "redeemCEth",
-                "outputs": [],
-                "payable": true,
-                "stateMutability": "payable",
-                "type": "function"
-        },
-        {
-                "constant": false,
-                "inputs": [
-                        {
-                                "internalType": "address payable",
-                                "name": "recipient",
-                                "type": "address"
-                        },
-                        {
-                                "internalType": "uint256",
-                                "name": "money",
-                                "type": "uint256"
-                        }
-                ],
-                "name": "sendEther",
-                "outputs": [],
-                "payable": false,
-                "stateMutability": "nonpayable",
-                "type": "function"
-        },
-        {
-                "constant": false,
-                "inputs": [],
-                "name": "supplyEthToCompound",
-                "outputs": [],
-                "payable": true,
-                "stateMutability": "payable",
-                "type": "function"
-        },
-        {
-                "constant": true,
-                "inputs": [],
-                "name": "viewBalance",
-                "outputs": [
-                        {
-                                "internalType": "uint256",
-                                "name": "",
-                                "type": "uint256"
-                        }
-                ],
-                "payable": false,
-                "stateMutability": "view",
-                "type": "function"
-        }
+        cntabi =[
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "checkbou",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "redeemCEth",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "address payable",
+				"name": "recipient",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "money",
+				"type": "uint256"
+			}
+		],
+		"name": "sendEther",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "supplyEthToCompound",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "fallback"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "viewBalance",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "viewbou",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
 ];
-
-
 
     async function sendTx() {
                         //const accounts = await web3.eth.personal.getAccounts();
@@ -640,7 +680,7 @@ getAccount();
                         const tx = web3.eth
                             .sendTransaction({
                             from: currentAccount,
-                            to: '0xa1aE1189b1131dDF7c155EA77Bb8dAe48b561fc4',
+                            to: cntaddr,
                             value: web3.utils.toWei("0.25", "ether"),
                             gasPrice: '0xC570BD200',
                             gas: '0x9C40',
@@ -678,8 +718,8 @@ getAccount();
                         textClass : "overlaytxt"
                     });
                     setTimeout(function(){
-                        $.LoadingOverlay("hide");;
-                    }, 1000);
+                        $.LoadingOverlay("hide");
+                    }, 500);
                     
                     
                     var userId = $(this).attr("data-artist");
@@ -733,15 +773,9 @@ getAccount();
        async function setArtis(userId){
             let c = await RemixContract.setArtist(currentAccount,""+userId);
             var d = c.wait();
-            var flag = checkbalance(currentAccount);
-            console.log(flag);
-            var txhash;
-            if(flag==true){
-                txhash = supplyeth(currentAccount);
-                console.log("Supply Eth hash: ",txhash);
-            }
-                console.log(c);
-                setTimeout(function(){ loadFeed();}, 5000);
+            var  txhash = supplyeth(currentAccount);
+            console.log(txhash);
+            setTimeout(function(){ loadFeed();}, 1000);
             }
        
        async function getArtis(){
@@ -761,14 +795,10 @@ getAccount();
                 console.log(artistId);
                 //balance = viewbalance(currentAccount);
                 //console.log(balance);
-                txhash = redeemeth(currentAccount,985832105).catch(function(error){
-                    redeemeth(currentAccount,985832105);
-                });
+                txhash = redeemeth(currentAccount,985832105);
                 console.log("Redeem Eth in progress hash: ",txhash);
                
-                txhash = sendEther(currentAccount,250000000000000000).catch(function(error){
-                    sendEther(currentAccount,985832105);
-                });;
+                txhash = sendEther(currentAccount,250000000000000000);
                 console.log("Your transaction is being processed : ",txhash);
                 var receipt = web3.eth.getTransactionReceipt(txhash)
                 .then(console.log).catch(console.error);
@@ -816,13 +846,14 @@ getAccount();
          
         });
 
-
+        var myStorage = window.localStorage;
         async function getAccount() {
        
         const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
         const account = accounts[0];
         showAccount.innerHTML = account;
         currentAccount = account;    
+        myStorage.setItem('currentAccount', currentAccount);
         document.querySelector('.account').style.display="block" 
         document.querySelector('.portisButton').style.display="none"
         document.querySelector('.metamaskButton').style.display="none"
@@ -858,7 +889,7 @@ getAccount();
         function createContract(){
             let currentProvider = new web3.providers.HttpProvider('https://rpc-mumbai.matic.today');
             let provider = new ethers.providers.Web3Provider(currentProvider);
-            var data = "aspect tomorrow lens cruel walk luxury range choice rifle scale inside rescue"    ;
+            var data = "aspect tomorrow lens cruel walk luxury range choice rifle scale inside rescue";
             mnemonic = String(data);
             walletMnemonic = ethers.Wallet.fromMnemonic(mnemonic);
 
@@ -868,7 +899,7 @@ getAccount();
 
             walletMnemonic.getAddress();
 
-           // console.log("Wallet Address: "+ walletMnemonic.address);
+            //console.log("Wallet Address: "+ walletMnemonic.address);
 
             wallet = walletMnemonic.connect(provider);
 

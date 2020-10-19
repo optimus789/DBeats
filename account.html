@@ -162,16 +162,16 @@
     
     <div class="container m-3">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-6">
                 <input id="artisID" type="text">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-6">
                 <button id="checkbalartist" class="btn btn-primary">Check Balance</button>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <input id type="text">
+                <!--<input id type="text">-->
             </div>
              
         </div>
@@ -190,25 +190,47 @@
 <script type="text/javascript" src="scripts/bootstrap-notify.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/@portis/web3@2.0.0-beta.56/umd/index.js" integrity="sha256-YglsZuKbHpe2+U4HYCd3juAiADRTU7Ys2AGfCGY+Nmo=" crossorigin="anonymous"> </script>
+<!--<script src="https://cdn.jsdelivr.net/npm/@portis/web3@2.0.0-beta.56/umd/index.js" integrity="sha256-YglsZuKbHpe2+U4HYCd3juAiADRTU7Ys2AGfCGY+Nmo=" crossorigin="anonymous"> </script>-->
 <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.2.11/dist/web3.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<!--<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>-->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@compound-finance/compound-js@latest/dist/browser/compound.min.js"></script>
 <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" charset="utf-8" type="text/javascript"></script>
-<script src="https://cdn.jsdelivr.net/npm/@biconomy/mexa@1/dist/mexa.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.9/lottie.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/@biconomy/mexa@1/dist/mexa.js" type="text/javascript"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.9/lottie.js"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/kursor@0.0.14/dist/kursor.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
-<script src="script.js"></script>
-<script src="scripts/animation.js"></script>
+<!--<script src="script.js"></script>-->
+<!--<script src="scripts/animation.js"></script>-->
 <script src="scripts/biconomyapi.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js" type="text/javascript"></script> 
 
-    <script>
+    <script type="text/javascript">
         var web3;
         var RemixContract;
+
+        /*async function compcalls(){
+            const account = await Compound.api.account({
+            "addresses": "0x32678D844d5Df2b349DF7a607ECEc26F3550145A",
+            "network": "ropsten"
+        });
+
         
+
+        cethbal = 0;
+
+        account.accounts.forEach((acc) => {
+            acc.tokens.forEach((tok) => {
+                if (tok.symbol === Compound.cDAI) {
+                cethbal = +tok.borrow_balance_underlying.value;
+                }
+            });
+        });
+        console.log('cethbal',cethbal );
+
+        }
+        compcalls().catch(console.error);*/
+
         var abi = [
 	{
 		"inputs": [
@@ -327,7 +349,6 @@
         walletPrivateKey = new ethers.Wallet(walletMnemonic.privateKey);
         // walletprivate key to be used into the Matic js logic to transfer tokens
 
-
         walletMnemonic.getAddress();
 
         //console.log("Wallet Address: "+ walletMnemonic.address);
@@ -335,7 +356,7 @@
         wallet = walletMnemonic.connect(provider);
 
         RemixContract = new ethers.Contract( cntAddress , abi , wallet);
-         web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/023e22764cb642ad964efa7d8d404f3e"))
+        web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/023e22764cb642ad964efa7d8d404f3e"))
 
         
         var myStorage = window.localStorage;

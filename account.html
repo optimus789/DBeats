@@ -225,7 +225,7 @@
         account.accounts.forEach((acc) => {
             acc.tokens.forEach((tok) => {
                 if (tok.symbol === Compound.cDAI) {
-                cethbal = +tok.borrow_balance_underlying.value;
+                cethbal = +tok.supply_balance_underlying.value;
                 }
             });
         });
@@ -385,8 +385,7 @@
                 var txhash2 = viewBou(currentAccount);
                 console.log("View Bou: "+txhash2);   
                     }, 5000);
-            
-        });
+              });
 
     </script>
 

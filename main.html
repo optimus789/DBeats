@@ -194,6 +194,7 @@ Artist
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
 <script src="script.js"></script>
 <script src="scripts/animation.js"></script>
+<script src="scripts/somedec.js" type="text/javascript"></script>
 <script src="scripts/biconomyapi.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js" type="text/javascript"></script> 
 <script> 
@@ -288,48 +289,6 @@ getAccount();
 				"type": "address"
 			},
 			{
-				"internalType": "uint256",
-				"name": "indx",
-				"type": "uint256"
-			}
-		],
-		"name": "removeArtist",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_Address",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "_artistID",
-				"type": "string"
-			}
-		],
-		"name": "setArtist",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_Address",
-				"type": "address"
-			},
-			{
 				"internalType": "string",
 				"name": "artistID",
 				"type": "string"
@@ -383,10 +342,67 @@ getAccount();
 		],
 		"stateMutability": "view",
 		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getallsub",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_Address",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "indx",
+				"type": "uint256"
+			}
+		],
+		"name": "removeArtist",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_Address",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_artistID",
+				"type": "string"
+			}
+		],
+		"name": "setArtist",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	}
 ];
+
             var txhash;
-            const cntAddress = "0x55D997bF0b0556c3A749480Fd2D4f6e557f66A7D";//"0x9C2397DC462261DD2237a18Fa4B943ea8805B72B";
+            //matic cnt details
+            //const cntAddress = "0x2D9c7f60DaA96aD8D1f73Fe8C1b2EA8095dBbf84"; //"0x55D997bF0b0556c3A749480Fd2D4f6e557f66A7D";
             audio.addEventListener('timeupdate', function (){
             if (segmentEnd && audio.currentTime >= segmentEnd) {
                 audio.pause();
@@ -420,7 +436,7 @@ getAccount();
 
             async function loadFeed(){
  
-                
+                    
             //Load Feed
             let c = await RemixContract.getArtist(currentAccount);
               
@@ -429,6 +445,7 @@ getAccount();
                 subscribedTo = subscribedTo.slice(0, -1);
                 console.log(subscribedTo);
                 $('#demo3').html("");
+                
                 if(subscribedTo.length<=0)
                 {
                     $('#demo3').html('<div class="text-center"><lottie-player src="https://assets7.lottiefiles.com/packages/lf20_EMTsq1.json"  background="transparent"  speed="1"  style="width: 600px; height: 600px;" loop   autoplay></lottie-player></div>');
@@ -437,7 +454,7 @@ getAccount();
                     {
                         console.log("foR:"+i);
                         var sourceUrl = getJSON("https://discoveryprovider3.audius.co/v1/users/"+subscribedTo[i]+"/tracks");
-                        
+                    
                             gjson3 = JSON.parse(sourceUrl);
 
                             for(var j =0;j<gjson3.data.length;j++)//gjson3.data.length
@@ -569,9 +586,16 @@ getAccount();
             
         } 
 
-        const cntaddr = "0x32678D844d5Df2b349DF7a607ECEc26F3550145A";
+        //rinkeby side contract
+
+        const cntaddr = "0xc5cE61616F18DB25E79eB09D48B8f9b239A4B692";
 
         cntabi =[
+	{
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "fallback"
+	},
 	{
 		"constant": false,
 		"inputs": [],
@@ -592,7 +616,7 @@ getAccount();
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "amount",
+				"name": "_amount",
 				"type": "uint256"
 			}
 		],
@@ -607,19 +631,19 @@ getAccount();
 		"inputs": [
 			{
 				"internalType": "address payable",
-				"name": "recipient",
+				"name": "_recipient",
 				"type": "address"
 			},
 			{
 				"internalType": "uint256",
-				"name": "money",
+				"name": "_amount",
 				"type": "uint256"
 			}
 		],
 		"name": "sendEther",
 		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
+		"payable": true,
+		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -636,11 +660,6 @@ getAccount();
 		"payable": true,
 		"stateMutability": "payable",
 		"type": "function"
-	},
-	{
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "fallback"
 	},
 	{
 		"constant": true,
@@ -673,6 +692,7 @@ getAccount();
 		"type": "function"
 	}
 ];
+
 
     async function sendTx() {
                         //const accounts = await web3.eth.personal.getAccounts();
@@ -714,6 +734,7 @@ getAccount();
                 sendTx()
                 .then(receipt => {
                     console.log("Got receipt");
+                    myStorage.setItem('checkbouval', checkbouval+1);
                     $.LoadingOverlay("text", "Transaction Confirmed, Enjoy your songs", {
                         textClass : "overlaytxt"
                     });
@@ -822,7 +843,7 @@ getAccount();
                 // console.log("aat   C: "+c);
                 console.log(c);
                 var indx =c;
-                let d = await RemixContract.removeArtist(currentAccount,indx);
+                let d = await RemixContract.removeArtist(currentAccount,indx,artistId);
                 console.log(d);
                 setTimeout(function(){ loadFeed();}, 5000);
             }
@@ -847,6 +868,8 @@ getAccount();
         });
 
         var myStorage = window.localStorage;
+        var checkbouval = myStorage.getItem('checkbouval');
+        //var checkbou;
         async function getAccount() {
        
         const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
@@ -881,31 +904,10 @@ getAccount();
         OPTIONS
         );
             createContract();
+            rinkRemixContract = createrinkContract();
             loadFeed(); 
         }
 
-        var RemixContract;
-        
-        function createContract(){
-            let currentProvider = new web3.providers.HttpProvider('https://rpc-mumbai.matic.today');
-            let provider = new ethers.providers.Web3Provider(currentProvider);
-            var data = "aspect tomorrow lens cruel walk luxury range choice rifle scale inside rescue";
-            mnemonic = String(data);
-            walletMnemonic = ethers.Wallet.fromMnemonic(mnemonic);
-
-            walletPrivateKey = new ethers.Wallet(walletMnemonic.privateKey);
-            // walletprivate key to be used into the Matic js logic to transfer tokens
-
-
-            walletMnemonic.getAddress();
-
-            //console.log("Wallet Address: "+ walletMnemonic.address);
-
-            wallet = walletMnemonic.connect(provider);
-
-            RemixContract = new ethers.Contract( cntAddress , abi , wallet);
-        }
- 
 
         function getPortisAccount()
         {        

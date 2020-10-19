@@ -172,12 +172,12 @@
                 <button id="checkbalartist" class="btn btn-primary">Check Balance</button>
             </div>
         </div>
-        <div class="row">
+        <!--<div class="row">
             <div class="col-md-12">
-                <p id="yourshare"></p>
+                <input id type="text">
             </div>
              
-        </div>
+        </div>-->
     </div>
 
 </body>
@@ -212,95 +212,67 @@
     <script type="text/javascript">
         var web3;
         var RemixContract;
-        /*var compound = new Compound('ropsten', {
-            mnemonic: 'mnemonicxyz..', // preferably with environment variable
-            });*/
-
-            // 
-        var  cethbal;
-        var  acc1,tok;
-        
         var rinkRemixContract = createrinkContract();
-        var price,price2;
-        //start of compound js calls
-        
-        const compound = new Compound();
-        (async function () { 
-            price = await compound.getPrice(Compound.cETH,Compound.USDC); 
-            console.log('ceth', price); // 6 decimals, see Open Price Feed docs
-        price2 = await compound.getPrice(Compound.ETH); // supports cTokens too 
-        console.log('eth', price2); })().catch(console.error);
-
-        async function compcalls(){             // Compound js API call
+        /*async function compcalls(){
             const account = await Compound.api.account({
-            "addresses": "0x93ba13F5958cEf4A4beB2f40E9282012125B329c",
-            "network": "ropsten"      //ropsten selected
+            "addresses": "0x32678D844d5Df2b349DF7a607ECEc26F3550145A",
+            "network": "ropsten"
         });
+
         
-        
+
+        cethbal = 0;
+
         account.accounts.forEach((acc) => {
-            acc1=acc;
-            //alert(acc); //not alerting
             acc.tokens.forEach((tok) => {
-                //alert("Check sym"+tok.symbol);//no tokens are fetched here
-                if (tok.symbol === Compound.cETH) {
-                    //alert("Ran"+tok.symbol);//not alerting too
-                cethbal = tok.supply_balance_underlying;
+                if (tok.symbol === Compound.cDAI) {
+                cethbal = +tok.supply_balance_underlying.value;
                 }
             });
         });
-
         console.log('cethbal',cethbal );
 
         }
-        compcalls().catch(console.error);
+        compcalls().catch(console.error);*/
 
-
-        (async function () { //compound js COMP Methods
-            const bal = await Compound.comp.getCompBalance('0x93ba13F5958cEf4A4beB2f40E9282012125B329c');
-            console.log('Balance', bal);
-        })().catch(console.error);
-
-  
-
+       
         var myStorage = window.localStorage;
 
         var currentAccount = myStorage.getItem('currentAccount');
 
         $("#checkbalartist").click(function(){
-            var tbou;
-            var artisid = $("#artisID").val();
+            let c = await RemixContract.findArtist(currentAccount,artistId);
+                //console.log("baher C: "+c);
+
+                // console.log("aat   C: "+c);
+                console.log(c);
+                var indx =c;
+                let d = await RemixContract.removeArtist(currentAccount,indx,artistId);
+                console.log(d);
+            /*var artisid = $("#artisID").val();
             alert("artisid"+artisid);
-
-            (async function(){
-            let subcount = await RemixContract.getSubCount(artisid);
-            console.log(artisid+"sub total count: "+subcount);
-            let totalcount = await RemixContract.getallsub();
-            console.log("All sub: "+totalcount);
-            totalstake = totalcount*250000000000000000;
-            tbou = viewBou(currentAccount);
-            console.log("View Bou: "+tbou);   
-            totalinterest = tbou - totalstake;
-            pershare = totalinterest/totalcount;
-            artistshare = subcount*pershare;
-            artistshare = Web3.utils.fromWei(String(artistshare), 'ether');
-            console.log("Your share : "+artistshare);
-            console.log("Total interest: "+totalinterest);
-            $("#yourshare").html(artistshare+" ETH");
-            const etherValue = Web3.utils.fromWei(String(totalinterest), 'ether');
-            console.log(etherValue);
-            })().catch(console.log);
-
-        });
-            //var  txhash = checkBou(currentAccount);
-            //console.log("Check bou: "+txhash);
+            async function a(){
+            let c = await RemixContract.getSubCount(artisid);
+            console.log(artisid+"sub total count: "+c);
+            let d = await RemixContract.getallsub();
+            console.log("All sub"+d);
+            }
+            a();
+            var  txhash = checkBou(currentAccount);
+            console.log("Check bou: "+txhash);
             
             //var receipt = web3.eth.getTransactionReceipt(txhash).then(console.log).catch(console.error);
                 
+            setTimeout(function(){
+                var txhash2 = viewBou(currentAccount);
+                console.log("View Bou: "+txhash2);   
+                    }, 5000);*/
             
-    
+             
+            
+                
 
-           
+              });
               //4001832821050986936
               //2000000000000000000
             //var txhash = viewbalance(currentAccount);

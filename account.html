@@ -22,10 +22,13 @@
     <script src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script>
 
 
-
     <link rel="stylesheet" href="https://unpkg.com/kursor/dist/kursor.css">
     <link href="styles/styles.css" rel="stylesheet">
     <style>
+        .container {
+            height: auto !important;
+            position: relative; 
+        }
         audio::-webkit-media-controls-play-button,
         audio::-webkit-media-controls-panel {
             background-color: rgba(255, 255, 255, 0.1);
@@ -139,7 +142,7 @@
             </div>
         </div>
     </nav>
-    <div class="card container connectionCard " style="width: 200px;height:100px;">
+    <!--<div class="card container connectionCard " style="width: 200px;height:100px;">
         <p class="  text-center   gont subscribeText">connect with </p>
         <div class="text-center">
             <img class=" mx-3 text-center  metamaskButton zoom" src="img/metamask-fox.svg" alt="Metamask Wallet"
@@ -155,32 +158,32 @@
             style="display: none; transition: all 0.5s linear;  text-shadow: 0.5px 0.5px 0.1rem #000;">connected <img
                 class=" m-1 text-center  portisButton zoom" src="img/portis.svg" alt="Portis by Shapeshift" height="45"
                 width="45" /></p>
-    </div>
+    </div>-->
 
     <p class="account text-center  mt-3" style="display: none;">Account: <span class="showAccount "></span></p>
 
     
-    <div class="container m-3">
+    <div class="container mx-6 mt-3">
         <div class="row">
             <div class="col-md-6 col-sm-6">
-                <input id="artisID" type="text">
+                <input id="artisID" class="mt-3" type="text">
             </div>
             <div class="col-md-6 col-sm-6">
                 <button id="checkbalartist" class="btn btn-primary">Check Balance</button>
             </div>
         </div>
-        <div class="row">
+        <!--<div class="row">
             <div class="col-md-12">
-                <!--<input id type="text">-->
+                <input id type="text">
             </div>
              
-        </div>
+        </div>-->
     </div>
 
 </body>
 
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
 
@@ -382,9 +385,6 @@
                 var txhash2 = viewBou(currentAccount);
                 console.log("View Bou: "+txhash2);   
                     }, 5000);
-            
-
-            
             
         });
 

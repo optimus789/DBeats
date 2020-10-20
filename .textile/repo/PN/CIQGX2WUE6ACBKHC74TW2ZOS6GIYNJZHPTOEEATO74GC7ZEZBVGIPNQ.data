@@ -1,0 +1,1016 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="De Centralised Beats">
+<meta name="keywords" content="DBeats">
+<meta name="author" content="DBeats Team">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/css/bootstrap-notify.min.css" rel="stylesheet">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.9/lottie.js"></script>
+<script src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script>
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/kursor/dist/kursor.css">
+<link href="styles/styles.css" rel="stylesheet">
+<style>
+
+            audio::-webkit-media-controls-play-button,
+            audio::-webkit-media-controls-panel 
+            {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #16E9E5;
+            }
+            #music-player 
+            {
+            width:100%;
+            height:20px!important;
+            background:#fff;
+            color: #fff;
+            margin: 0 auto;
+            z-index: 99;
+            }
+            .card-body {
+                position: absolute;
+                display: block; 
+                background-image: linear-gradient(0deg, rgba(117, 116, 116, 0.0),rgba(42,157,255,0.5));
+                top:0;  
+                left: 0;
+                right: 0;
+                bottom: 0; 
+                z-index: 999; 
+                cursor: pointer;
+                } 
+
+                .card-title{
+                position: absolute;
+                top: 50%;
+                left: 50%; 
+                font-size: 16px;
+                color: white;
+                transform: translate(-50%,-50%);
+                -ms-transform: translate(-50%,-50%);
+                filter: drop-shadow(0 0.15rem 0.35rem #000);
+
+                }
+
+                .zoom{
+                    transition: all 0.2s linear;
+                    transition-timing-function: ease-in-out;
+                }
+                .zoom:hover{
+                    transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+
+                }
+                .connectionCard{
+                    transition: all 0.5s linear;
+                }
+
+                
+                .slick-wrapper {
+                        width: 80%;
+                        background-color: aqua;
+                    }
+                    .slide-item {
+                        background-color: rebeccapurple;
+                        color: aqua;
+                        display: flex !important;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+                        height: 200px;
+                        border: 1px solid white;
+                    }
+
+         </style>
+</head>
+<body background-image="https://www.geeksforgeeks.org/wp-content/uploads/jquery-banner-768x256.png">
+<div class="section">
+
+
+    
+</div>
+<script src="https://cdn.jsdelivr.net/npm/kursor@0.0.14/dist/kursor.js"></script>
+<nav class="navbar navbar-expand-lg navbar-light transparent" style="box-shadow: none;">
+<a class="navbar-brand" href="#"><img src="img/DBeatsVert.png" width="30" height="30" alt="">
+</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item active">
+<a class="nav-link active" href="account.html">Dashboard<span class="sr-only"> </span></a>
+</li>
+<li class="nav-item d-none">
+<a class="nav-link" href="#">Link</a>
+</li>
+<li class="nav-item dropdown d-none">
+<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Dropdown
+</a>
+<div class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
+<a class="dropdown-item" href="#">Action</a>
+<a class="dropdown-item" href="#">Another action</a>
+<div class="dropdown-divider"></div>
+<a class="dropdown-item" href="#">Something else here</a>
+</div>
+</li>
+<li class="nav-item d-none">
+<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+</li>
+</ul>
+
+<div class="md-form active-purple active-purple-2  ">
+<input class="form-control d-none" type="text" placeholder="Search" aria-label="Search">
+</div>
+</div>
+</nav>
+<div class="card container connectionCard " style="width: 200px;height:100px;">
+<p class="  text-center   gont subscribeText">connect with </p>
+<div class="text-center">
+<img class=" mx-3 text-center  metamaskButton zoom" src="img/metamask-fox.svg" alt="Metamask Wallet" height="45" width="45" />
+<img class=" mx-3 text-center  portisButton zoom" src="img/portis.svg" alt="Portis by Shapeshift" height="45" width="45" />
+</div>
+<p class=" gont connectedMeta mx-3" style="display: none;transition: all 0.5s linear;  text-shadow: 0.5px 0.5px 0.1rem #000; ">connected <img class=" m-1 text-center  metamaskButton zoom" src="img/metamask-fox.svg" alt="Metamask Wallet" height="45" width="45" /></p>
+<p class="    gont connectedPortis mx-3" style="display: none; transition: all 0.5s linear;  text-shadow: 0.5px 0.5px 0.1rem #000;">connected <img class=" m-1 text-center  portisButton zoom" src="img/portis.svg" alt="Portis by Shapeshift" height="45" width="45" /></p>
+</div>
+
+<p class="account text-center  mt-3" style="display: none;">Account: <span class="showAccount "></span></p>
+
+
+
+
+
+<h1 class="text-center  mt-3  ">Trending Tracks</h1>
+<div id="demo" style="padding-bottom:50px; ">
+</div>
+<h1 class="text-center  my-3  ">Your Feed</h1>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<div id="demo3" class="container ">
+</div>
+<div class="now-playing fixed-bottom  mx-5  px-5 py-3  card shadow" style="border-radius: 50px 50px 0px 0px ;
+        filter: drop-shadow(0.0rem -0.25rem 0.2rem rgba(102, 102, 102, 0.3));background-color: #ffffff;
+background-image: linear-gradient(180deg,  #16E9E5 0%, #ffffff 90%, #ffffff 100%);">
+<div class="row">
+<div class="col-sm-2">
+<img id="now-playing-artwork" class="shadow-img rounded-circle rotating" src="img/cd.png" width="100px" height="100px" alt="">
+</div>
+<div class="col-sm-10 text-right  ">
+<div id="title" style="font-weight: 700;">
+Title
+</div>
+<div id="artist">
+Artist
+</div>
+<button class="btn    rounded-pill " data-custom-open="modal-1" id="subscribe" data-artist="" style="width: 150px;" type="submit"><strong>SUBSCRIBE</strong></button>
+ 
+</div>
+</div>
+<audio id="music-player" class="mt-3 bg-transparent" controls><source id="music-player-src" src="https://discoveryprovider.audius.co/v1/tracks/5QBJ1/stream" type="audio/mpeg">Your browser does not support the audio element.</audio> </div>
+</div>
+
+
+
+
+
+
+</body>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+<script type="text/javascript" src="scripts/bootstrap-notify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@portis/web3@2.0.0-beta.56/umd/index.js" integrity="sha256-YglsZuKbHpe2+U4HYCd3juAiADRTU7Ys2AGfCGY+Nmo=" crossorigin="anonymous"> </script>
+<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.2.11/dist/web3.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@compound-finance/compound-js@latest/dist/browser/compound.min.js"></script>
+<script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" charset="utf-8" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/@biconomy/mexa@1/dist/mexa.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.9/lottie.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/kursor@0.0.14/dist/kursor.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+
+<script src="script.js"></script>
+<script src="scripts/animation.js"></script>
+<script src="scripts/somedec.js" type="text/javascript"></script>
+<script src="scripts/biconomyapi.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js" type="text/javascript"></script> 
+<script> 
+    
+    //const compound = new Compound(window.ethereum);
+
+   /*(async function() {
+
+    console.log('Supplying ETH to the Compound protocol...');
+    const trx = await compound.supply(Compound.ETH, 1);
+    console.log('Ethers.js transaction object', trx);
+
+    })().catch(console.error);    
+
+*/
+var web;
+
+   
+loadTrending(); 
+
+getAccount();
+   
+
+    function getJSON(url) {
+            var resp ;
+            var xmlHttp ;
+
+            resp  = '' ;
+            xmlHttp = new XMLHttpRequest();
+
+            if(xmlHttp != null)
+            {
+                xmlHttp.open( "GET", url, false );
+                xmlHttp.send( null );
+                resp = xmlHttp.responseText;
+            }
+
+            return resp ;
+        } 
+
+        function loadTrending(){
+
+
+            var gjson ;
+        gjson = getJSON('https://discoveryprovider.audius.co/v1/tracks/trending') ;
+
+        var gjson2 = JSON.parse(gjson);
+
+        for(var i =0;i<35;i++){
+                var artwork = gjson2.data[i].artwork['150x150'];
+                var description = gjson2.data[i].description;
+                var duration = gjson2.data[i].duration;
+                var id = gjson2.data[i].id;
+                var title = gjson2.data[i].title;   
+                var user = gjson2.data[i].user;     
+                var username = gjson2.data[i].user.name;
+                var userId = gjson2.data[i].user.id;
+                var trackLayout = '<div class="card m-3 music-artwork rounded-circle" style="width: 150px;height:200px;" data-artwork="'+artwork+'" data-artist="'+username+'" data-artistid="'+userId+'" name="'+title+'"   data-id="'+id+'" ><img class="rounded-circle"  style="height:100%;width:100%;" src="'+artwork+'" alt="Card image cap"><div class="card-body rounded-circle"   ><h5 class="card-title text-center">'+title+'</h5> </div></div>';
+                $('#demo').append(trackLayout);
+                //console.log(i);    
+
+        }
+
+        }
+
+       var subscribed = false;
+        var audio = document.getElementById('music-player');
+        
+        var source = document.getElementById('music-player-src');
+
+        var title = document.getElementById('title');
+
+        var artist = document.getElementById('artist');
+
+        var artwork = document.getElementsByClassName('music-artwork');
+
+        var segmentEnd;
+
+        var currentAccount;
+
+        var subscribedTo="";
+
+        var selectedArtworkUrl ="https://via.placeholder.com/150";
+ 
+        var portis = null;
+        var abi = [
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_Address",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "artistID",
+				"type": "string"
+			}
+		],
+		"name": "findArtist",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_Address",
+				"type": "address"
+			}
+		],
+		"name": "getArtist",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "s",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_artistID",
+				"type": "string"
+			}
+		],
+		"name": "getSubCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getallsub",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_Address",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "indx",
+				"type": "uint256"
+			}
+		],
+		"name": "removeArtist",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_Address",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_artistID",
+				"type": "string"
+			}
+		],
+		"name": "setArtist",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+];
+
+            var txhash;
+            //matic cnt details
+            //const cntAddress = "0x2D9c7f60DaA96aD8D1f73Fe8C1b2EA8095dBbf84"; //"0x55D997bF0b0556c3A749480Fd2D4f6e557f66A7D";
+            audio.addEventListener('timeupdate', function (){
+            if (segmentEnd && audio.currentTime >= segmentEnd) {
+                audio.pause();
+            }   
+            console.log(audio.currentTime);
+            if(!subscribed&&audio.currentTime>10)
+            {
+                audio.pause(); 
+                $.notify({
+                    // options
+                    message: 'Please Subscribe to listen more' 
+                },{
+                    // settings
+                    type: 'danger'
+                });
+            }
+        }, false);
+
+        function playSegment(startTime, endTime){
+            segmentEnd = endTime;
+            audio.currentTime = startTime;
+            audio.play();
+        }
+        var gjson3;
+        function toTitleCase(str) {
+                                    return str.replace(/\w\S*/g, function(txt){
+                                        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                                    });
+                                }
+
+
+            async function loadFeed(){
+ 
+                    
+            //Load Feed
+            let c = await RemixContract.getArtist(currentAccount);
+              
+                subscribedTo = c;
+                subscribedTo = subscribedTo.split(","); 
+                subscribedTo = subscribedTo.slice(0, -1);
+                console.log(subscribedTo);
+                $('#demo3').html("");
+                
+                if(subscribedTo.length<=0)
+                {
+                    $('#demo3').html('<div class="text-center"><lottie-player src="https://assets7.lottiefiles.com/packages/lf20_EMTsq1.json"  background="transparent"  speed="1"  style="width: 600px; height: 600px;" loop   autoplay></lottie-player></div>');
+                }
+                var sourceUrl =[];
+ 
+
+                    for(var i = 0;i<subscribedTo.length;i++)
+                    {
+                        console.log("foR:"+i);
+                        sourceUrl[i] = getJSON("https://discoveryprovider3.audius.co/v1/users/"+subscribedTo[i]+"/tracks");
+                    
+                    }
+
+
+                            
+                        
+
+                            for(var i =0;i<sourceUrl.length;i++)//gjson3.data.length
+                                {
+                                gjson3 = JSON.parse(sourceUrl[i]);
+                                for(var j= 0;j<gjson3.data.length;j++)
+                                    {
+                                var artwork = gjson3.data[j].artwork['150x150'];
+                                var description = gjson3.data[j].description;
+                                var duration = gjson3.data[j].duration;
+                                var id = gjson3.data[j].id;
+                                var title = gjson3.data[j].title;   
+                                var user = gjson3.data[j].user;     
+                                var username = gjson3.data[j].user.name;
+                                var userId = gjson3.data[j].user.id;
+                                username = toTitleCase(username);
+                                const myVar = duration;
+                                if(j==0)
+                                {
+                                    $('#demo3').append(' <div class="row"><div class="col-md-6 text-left"><br><h4 class="text-left text-dbeats halaney mx-3" data-toggle="tooltip" data-placement="top" title="Subscribed to">'+username+'</h4></div><div class="col-md-6 text-right"><button class="btn rounded-pill bg-white unsubscribe" onclick="deleteArtis(this)"   data-artistid="'+userId+'" style="width: 175px;" type="submit"><strong>UNSUBSCRIBE</strong></button></div></div>');
+                                     
+
+                                }   
+                                if(myVar>3600)
+                                    {
+                                        console.log(duration);
+
+                                    //var trackLayout = '<div class="card m-3 music-artwork-sub" style="width: 120px ;height:200px;" onclick="play(this)" data-artwork="'+artwork+'"  data-artist="'+username+'" data-artistid="'+userId+'" name="'+title+'"   data-id="'+id+'" ><img class="rounded"  style="height:100%;width:100%;" src="'+artwork+'" alt="Card image cap"><div class="card-body"   ><h5 class="card-title text-center">'+title+'</h5> </div></div>';
+                                    var trackLayout='<div class="card waves-effect  rounded text-white music-artwork-sub  p-3 m-3" onclick="play(this)" data-artwork="'+artwork+'" id="'+id+userId+'"  data-artist="'+username+'" data-artistid="'+userId+'" name="'+title+'"   data-id="'+id+'" ><div class="row"><div class="col-md-2 text-center"><img data-id="now-playing-artwork" class="shadow-img  " src="'+artwork+'" width="100px" height="100px" alt=""> </div> <div class="col-md-10">  <strong class="text-dbeats">'+title+'</strong><p title="Source Title" class="text-dbeats">'+username+'</p><p title="time" class="text-dark">'+moment.unix(myVar).utc().format('H [:] m [:] s [s]')+' </p></div></div></div>';
+                                
+                                    }
+                                    else{
+
+                                        var trackLayout='<div class="card waves-effect  rounded text-white music-artwork-sub  p-3 m-3" onclick="play(this)" data-artwork="'+artwork+'"  id="'+id+userId+'" data-artist="'+username+'" data-artistid="'+userId+'" name="'+title+'"   data-id="'+id+'" ><div class="row"><div class="col-md-2 text-center"><img data-id="now-playing-artwork" class="shadow-img  " src="'+artwork+'" width="100px" height="100px" alt=""> </div> <div class="col-md-10">  <strong class="text-dbeats">'+title+'</strong><p title="Source Title" class="text-dbeats">'+username+'</p><p title="time" class="text-dark">'+moment.unix(myVar).utc().format(' m [:] s [s]')+' </p></div></div></div>';
+
+                                    } 
+                                $('#demo3').append(trackLayout); 
+                                }
+
+                            }
+                     
+
+                }
+
+                function deleteArtis(thiselmt){
+                    console.log("In click ran");
+                    var thiselement = thiselmt;
+                    var artisId = $(thiselement).attr("data-artistid");
+                    
+                    delArtis(artisId);
+                    
+                };
+        var nowplayingcard = "";
+        $(".music-artwork").click(function() {
+
+            
+            var sourceUrl = "https://discoveryprovider.audius.co/v1/tracks/"+$(this).attr("data-id")+"/stream";
+            var audio = document.getElementById('music-player');     
+            $("#music-player-src").attr("src", sourceUrl);
+            $("#now-playing-artwork").attr("src", $(this).attr("data-artwork"));
+            var imageUrl = $(this).attr("data-artwork"); 
+                 //$("body").css("background-image", "url(" + imageUrl + ")"); 
+          
+
+            if(!audio.paused)
+            {
+                
+            audio.pause();
+            
+            }
+            audio.load();//suspends and restores all audio element
+            title.innerHTML = $(this).attr('name');
+            artist.innerHTML =  $(this).attr("data-artist");
+            //audio[0].play(); changed based on Sprachprofi's comment below
+
+            audio.oncanplaythrough = audio.play();
+           // $("#music-player").attr("src", urlsrc);
+           $("#subscribe").attr("data-artist", $(this).attr("data-artistid")); 
+            console.log($(this).attr("data-artistid"));
+            if(subscribedTo.indexOf($(this).attr("data-artistid"))!=-1)  //                !$.inArray($(this).attr("data-artistid"),subscribedTo))
+            {
+                //alert($(this).attr("data-artistid"));
+                subscribed = true;
+
+                $("#subscribe").html("DONATE"); 
+
+ //               $("#subscribe").attr("style", "opacity:0%"); 
+   //             $("#subscribe").prop('disabled', true);
+
+
+                
+            }else{
+                subscribed = false;
+                $("#subscribe").html("SUBSCRIBE"); 
+
+               // $("#subscribe").attr("style", "opacity:100%");  
+              //  $("#subscribe").prop('disabled', false);
+
+            }
+            
+        });
+
+
+        function play(thiselemt) {
+
+            subscribed = true;
+            $("#subscribe").html("DONATE"); 
+
+           // $("#subscribe").attr("style", "opacity:0")
+          //  $("#subscribe").prop('disabled', true);
+
+            var thiselement = thiselemt;
+             var sourceUrl = "https://discoveryprovider.audius.co/v1/tracks/"+$(thiselement).attr("data-id")+"/stream";
+            var audio = document.getElementById('music-player');     
+            $("#music-player-src").attr("src", sourceUrl);
+            $("#now-playing-artwork").attr("src", $(thiselement).attr("data-artwork"));
+            
+           
+
+            if(!audio.paused)
+            {
+             audio.pause(); 
+            $("#"+nowplayingcard).attr("style", "filter: drop-shadow(0 0.15rem 0.1rem rgba(102, 102, 102, 0.1));");
+            nowplayingcard = $(thiselement).attr("id");
+            $("#"+nowplayingcard).attr("style", "filter: drop-shadow(0 0rem 0.35rem #16E9E5)!important;");
+
+            }
+            else
+            {
+            nowplayingcard = $(thiselement).attr("id");
+             $("#"+nowplayingcard).attr("style", "filter: drop-shadow(0rem 0rem 0.35rem #16E9E5)!important;");
+            }
+            audio.load();//suspends and restores all audio element
+            title.innerHTML = $(thiselement).attr('name');
+            artist.innerHTML = $(thiselement).attr("data-artist");
+            //audio[0].play(); changed based on Sprachprofi's comment below
+
+            audio.oncanplaythrough = audio.play();
+           // $("#music-player").attr("src", urlsrc);
+           $("#subscribe").attr("data-artist", $(thiselement).attr("data-artistid"));   
+           
+            
+        } 
+
+        //rinkeby side contract
+
+        const cntaddr = "0xc5cE61616F18DB25E79eB09D48B8f9b239A4B692";
+
+        cntabi =[
+	{
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "fallback"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "checkbou",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "redeemCEth",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "address payable",
+				"name": "_recipient",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "sendEther",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "supplyEthToCompound",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "viewBalance",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "viewbou",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+];
+
+
+    async function sendTx() {
+                        //const accounts = await web3.eth.personal.getAccounts();
+
+                        const tx = web3.eth
+                            .sendTransaction({
+                            from: currentAccount,
+                            to: cntaddr,
+                            value: web3.utils.toWei("0.25", "ether"),
+                            gasPrice: '0xC570BD200',
+                            gas: '0x9C40',
+                            })
+                            .on("transactionHash", txHash => {
+                            // web3.currentProvider.send("evm_mine"); // execution of it seems to be blocked by sendTransaction in beta52
+                            console.log("Payment transactionHash", txHash);
+                            })
+                            .on("receipt", receipt => {
+
+                            console.log("on receipt");
+                            })
+                            .on("error", error => {
+                            console.log("on error", error);
+                            });
+
+                        const receipt = await tx;
+                        return receipt;
+                        }
+                        var receipt;
+        $("#subscribe").click(function() {
+           
+            if(!subscribed){
+           
+                                $.LoadingOverlay("show", {
+                                    image       : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle r="80" cx="500" cy="90"/><circle r="80" cx="500" cy="910"/><circle r="80" cx="90" cy="500"/><circle r="80" cx="910" cy="500"/><circle r="80" cx="212" cy="212"/><circle r="80" cx="788" cy="212"/><circle r="80" cx="212" cy="788"/><circle r="80" cx="788" cy="788"/></svg>',
+                                    text        : "Waiting for confirmation",
+                                    textClass : "overlaytxt",
+                                    textResizeFactor: 0.4
+                                });
+
+                sendTx()
+                .then(receipt => {
+                    console.log("Got receipt");
+                    checkbouval = parseInt(checkbouval) + 1;
+                    myStorage.setItem('checkbouval', checkbouval);
+                    if(checkbouval%4==0)
+                    {
+                            var  txhash = checkBou(currentAccount);
+                            console.log("Check bou: "+txhash);
+            
+                    }
+                    $.LoadingOverlay("text", "Transaction Confirmed, Enjoy your songs", {
+                        textClass : "overlaytxt"
+                    });
+                    setTimeout(function(){
+                        $.LoadingOverlay("hide");
+
+                         
+                    }, 500);
+                    
+                    
+                    var userId = $(this).attr("data-artist");
+                    
+                    setArtis(userId);
+                    getArtis();
+                    
+
+                })
+                .catch(error =>{
+                    console.log("Got error:", error);
+                    $.LoadingOverlay("hide");
+                } );
+
+            }
+            else{
+                var artistId = $(this).attr("data-artist");
+                
+                if(portis==null){
+                    getPortisAccount();
+                }
+                else{
+                    portis.showPortis();
+                }
+
+                bootbox.prompt("You are donating to : <strong>"+$("#artist").html()+"</strong><br><small>Make a Payment to : <strong>0xb4f386b14e9Adc31096Ee0F6640804815a56C456</strong><br></small> Enter the Transaction Hash to Confirm Donation.", function(result){
+                    /* your callback code */ 
+                    console.log(result);
+                     
+                    receipt  = web3.eth.getTransaction(result).then( async function(v){ 
+
+
+
+                    donRemixContract = createdonatecnt();   
+                    let donate = await donRemixContract.setDonate(artistId,v.value); 
+
+                    console.log(v.value);
+                });
+                });
+            }      
+            /*ethereum.request({
+            method: 'eth_sendTransaction',
+            params: [
+                {
+                from: currentAccount,
+                to: '0xa1aE1189b1131dDF7c155EA77Bb8dAe48b561fc4',
+                value: '0x3782DACE9D90000',
+                gasPrice: '0xC570BD200',
+                gas: '0x9C40',
+                },
+            ],
+            })
+            .then((txHash) =>{ 
+               
+
+            var userId = $(this).attr("data-artist");
+            
+
+            
+           setArtis(userId);
+           getArtis();
+                  console.log(txHash)})
+            .catch((error) => console.error);*/
+
+         
+       });
+
+
+
+
+       
+       $('[data-toggle="tooltip"]').tooltip();
+
+
+
+       async function setArtis(userId){
+            let c = await RemixContract.setArtist(currentAccount,""+userId);
+            var d = c.wait();
+            var  txhash = supplyeth(currentAccount);
+            console.log(txhash);
+            setTimeout(function(){ loadFeed();}, 1000);
+            }
+       
+       async function getArtis(){
+                let c = await RemixContract.getArtist(currentAccount);
+               //console.log("baher C: "+c);
+
+                 // console.log("aat   C: "+c);
+                subscribedTo=c;
+                subscribedTo = subscribedTo.split(","); 
+         console.log(c);
+            }
+  
+
+
+            
+        async function delArtis(artistId){
+                console.log(artistId);
+                //balance = viewbalance(currentAccount);
+                //console.log(balance);
+                txhash = redeemeth(currentAccount,985832105);
+                console.log("Redeem Eth in progress hash: ",txhash);
+               
+                txhash = sendEther(currentAccount,250000000000000000);
+                console.log("Your transaction is being processed : ",txhash);
+                var receipt = web3.eth.getTransactionReceipt(txhash)
+                .then(console.log).catch(console.error);
+
+/* {
+  "status": true,
+  "transactionHash": "0x9fc76417374aa880d4449a1f7f31ec597f00b1f6f3dd2d66f4c9c6c445836d8b",
+  "transactionIndex": 0,
+  "blockHash": "0xef95f2f1ed3ca60b048b4bf67cde2195961e0bba6f70bcbea9a2c4e133e34b46",
+  "blockNumber": 3,
+  "contractAddress": "0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe",
+  "cumulativeGasUsed": 314159,
+  "gasUsed": 30234,
+  "logs": [{
+         // logs as returned by getPastLogs, etc.
+     }, ...]
+}*/
+                let c = await RemixContract.findArtist(currentAccount,artistId);
+                //console.log("baher C: "+c);
+
+                // console.log("aat   C: "+c);
+                console.log(c);
+                var indx =c;
+                let d = await RemixContract.removeArtist(currentAccount,indx,artistId);
+                console.log(d);
+                setTimeout(function(){ loadFeed();}, 5000);
+            }
+
+
+        const showAccount = document.querySelector('.showAccount');
+            
+////////////////////Metamask Connection////////////////////////
+        if (typeof window.ethereum !== 'undefined') {
+        console.log('MetaMask is installed!');
+        }
+
+        const ethereumButton = document.querySelector('.metamaskButton');
+        const portisButton = document.querySelector('.portisButton');
+
+        var isRegistered = false;
+
+        ethereumButton.addEventListener('click', () => {
+        //Will Start the metamask extension
+        getAccount();
+         
+        });
+        var checkbouval;
+        var myStorage = window.localStorage; 
+        if(myStorage.getItem('checkbouval')==null)
+        { 
+            checkbouval = 0; 
+
+        }
+        else
+        {
+            checkbouval =  parseInt(myStorage.getItem('checkbouval'));
+
+        }
+        //var checkbou;
+        async function getAccount() {
+       
+        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+        const account = accounts[0];
+        showAccount.innerHTML = account;
+        currentAccount = account;    
+        myStorage.setItem('currentAccount', currentAccount);
+        document.querySelector('.account').style.display="block" 
+        document.querySelector('.portisButton').style.display="none"
+        document.querySelector('.metamaskButton').style.display="none"
+
+        document.querySelector('.connectedMeta').style.display="block" 
+        
+        document.querySelector('.connectionCard').style.height="55px" 
+        document.querySelector('.connectionCard').style.width="205px" 
+        document.querySelector('.connectionCard').style.background="#c6ff00" 
+        document.querySelector('.connectionCard').style.color="#FFF" 
+
+
+         document.querySelector('.subscribeText').style.display="none"
+  
+        //    const bal = await Compound.comp.getCompBalance('0x2775b1c75658Be0F640272CCb8c72ac986009e38');
+        //    console.log('Balance', bal);
+        const OPTIONS = {
+        defaultBlock: "latest",
+        };
+
+        web3 = new Web3(
+        window.ethereum,
+        // Web3.providers.HtttpProvider("http://localhost:8545")
+        null,
+        OPTIONS
+        );
+            createContract();
+            rinkRemixContract = createrinkContract();
+            loadFeed(); 
+        }
+
+
+        function getPortisAccount()
+        {        
+                var portiswltaddr   ;  
+               portis = new Portis('2751e082-3ba0-4302-a7e9-3391f8f56ea8', "rinkeby");  
+               const web3 = new Web3(portis.provider);  
+                mnemonic = "0";  
+                portis.showPortis();    
+                portis.onLogin((walletAddress, email) => {   
+                    portiswltaddr = walletAddress;   
+                    
+                    //showAccount.innerHTML = walletAddress;                        
+                
+            }); 
+        }  
+        new kursor({
+            type: 1, 
+            removeDefaultCursor: true,
+            color: '#16E9E5'
+
+        })
+    </script>
+</html>

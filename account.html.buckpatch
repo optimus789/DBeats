@@ -1,0 +1,163 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="De Centralised Beats">
+    <meta name="keywords" content="DBeats">
+    <meta name="author" content="DBeats Team">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/css/bootstrap-notify.min.css"
+        rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.9/lottie.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script>
+
+
+
+    <link rel="stylesheet" href="https://unpkg.com/kursor/dist/kursor.css">
+    <link href="styles/styles.css" rel="stylesheet">
+    <style>
+        audio::-webkit-media-controls-play-button,
+        audio::-webkit-media-controls-panel {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #16E9E5;
+        }
+
+        #music-player {
+            width: 100%;
+            height: 20px !important;
+            background: #fff;
+            color: #fff;
+            margin: 0 auto;
+            z-index: 99;
+        }
+
+        .card-body {
+            position: absolute;
+            display: block;
+            background-image: linear-gradient(0deg, rgba(117, 116, 116, 0.0), rgba(42, 157, 255, 0.5));
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 999;
+            cursor: pointer;
+        }
+
+        .card-title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 16px;
+            color: white;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            filter: drop-shadow(0 0.15rem 0.35rem #000);
+
+        }
+
+        .zoom {
+            transition: all 0.2s linear;
+            transition-timing-function: ease-in-out;
+        }
+
+        .zoom:hover {
+            transform: scale(1.2);
+            /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+
+        }
+
+        .connectionCard {
+            transition: all 0.5s linear;
+        }
+
+
+        .slick-wrapper {
+            width: 80%;
+            background-color: aqua;
+        }
+
+        .slide-item {
+            background-color: rebeccapurple;
+            color: aqua;
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 200px;
+            border: 1px solid white;
+        }
+    </style>
+</head>
+
+<body background-image="https://www.geeksforgeeks.org/wp-content/uploads/jquery-banner-768x256.png">
+    <div class="section"></div>
+    <script src="https://cdn.jsdelivr.net/npm/kursor@0.0.14/dist/kursor.js"></script>
+    <nav class="navbar navbar-expand-lg navbar-light transparent" style="box-shadow: none;">
+        <a class="navbar-brand" href="#"><img src="img/DBeatsVert.png" width="30" height="30" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item d-none">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown d-none">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item d-none">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+
+            <div class="md-form active-purple active-purple-2  ">
+                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            </div>
+        </div>
+    </nav>
+    <div class="card container connectionCard " style="width: 200px;height:100px;">
+        <p class="  text-center   gont subscribeText">connect with </p>
+        <div class="text-center">
+            <img class=" mx-3 text-center  metamaskButton zoom" src="img/metamask-fox.svg" alt="Metamask Wallet"
+                height="45" width="45" />
+            <img class=" mx-3 text-center  portisButton zoom" src="img/portis.svg" alt="Portis by Shapeshift"
+                height="45" width="45" />
+        </div>
+        <p class=" gont connectedMeta mx-3"
+            style="display: none;transition: all 0.5s linear;  text-shadow: 0.5px 0.5px 0.1rem #000; ">connected <img
+                class=" m-1 text-center  metamaskButton zoom" src="img/metamask-fox.svg" alt="Metamask Wallet"
+                height="45" width="45" /></p>
+        <p class="    gont connectedPortis mx-3"
+            style="display: none; transition: all 0.5s linear;  text-shadow: 0.5px 0.5px 0.1rem #000;">connected <img
+                class=" m-1 text-center  portisButton zoom" src="img/portis.svg" alt="Portis by Shapeshift" height="45"
+                width="45" /></p>
+    </div>
+
+    <p class="account text-center  mt-3" style="display: none;">Account: <span class="showAccount "></span></p>
+
+    
+    </html>

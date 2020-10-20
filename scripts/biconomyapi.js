@@ -146,6 +146,7 @@ function viewBou(useraddr){
         },
         error: function (err){
             console.log(err);
+
             (async function() {
 
                 let c = await rinkRemixContract.viewbou();
@@ -188,6 +189,41 @@ function sendEther(useraddr,amount){
   });
   return jsonres;
 }
+
+
+function redeemDonations(walletAdd,artistid){
+    var jsonres;
+    var jdata =  { 'userAddress' :''+walletAdd,'apiId': 'cf704bea-ae12-4cc3-93f1-1af94f90b230','params': [walletAdd,artistid],'gasLimit':'0x927c0'};
+    $.ajax({
+        type: "POST",
+        url: "https://api.biconomy.io/api/v2/meta-tx/native",
+        headers: {"x-api-key" : "w7drmz352.e3ebfd00-e924-4641-8fbd-bcb414e5970c"},
+        data:JSON.stringify(jdata),
+        contentType: 'application/json',
+        async: false,
+        success: function (res) {
+            alert(JSON.stringify(res));
+            //var res = JSON.parse(res);
+            console.log(res);
+            jsonres=res.txHash;
+        },
+        error: function (err){
+            console.log(err);
+            (async function() {
+
+                let redeemDonation = await donRemixContract.redeemDonations(walletAdd, artistid); 
+                console.log(redeemDonation);
+            
+            })().catch(console.error); 
+            console.log("Error Occured ");
+
+        },
+  });
+  return jsonres;
+}
+
+
+
 
 /*curl --request POST 
 'https://api.biconomy.io/api/v2/meta-tx/native'  

@@ -115,7 +115,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="main.html">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item d-none">
                     <a class="nav-link" href="#">Link</a>
@@ -138,7 +138,7 @@
             </ul>
 
             <div class="md-form active-purple active-purple-2  ">
-                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                <input class="form-control d-none" type="text" placeholder="Search" aria-label="Search">
             </div>
         </div>
     </nav>
@@ -163,21 +163,59 @@
     <p class="account text-center  mt-3" style="display: none;">Account: <span class="showAccount "></span></p>
 
     
-    <div class="container mx-6 mt-3">
+    <h1 class="text-center">Artist Dashboard</h1>
+
+    <div class="container mx-6 mt-3 ">
+        <div class="card p-5" style="border-radius: 50px 50px 0px 0px ;
+        filter: drop-shadow(0.0rem -0.25rem 0.2rem rgba(102, 102, 102, 0.3));background-color: #ffffff;
+background-image: linear-gradient(180deg,  #16E9E5 0%, #ffffff 90%, #ffffff 100%);
+        "> 
         <div class="row">
-            <div class="col-md-6 col-sm-6">
-                <input id="artisID" class="mt-3" type="text">
-            </div>
-            <div class="col-md-6 col-sm-6">
-                <button id="checkbalartist" class="btn btn-primary">Check Balance</button>
-            </div>
+            <div class="col-md-12 col-sm-12 text-center">
+                <input id="artisID" placeholder="Type your Artist ID" class="form-control mt-3" type="text">
+
+            </div> 
+            <button id="checkbalartist" class="btn btn-success bg-dark rounded-pill">Check Balance</button>
+
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <p id="yourshare"></p>
+        
+
+            <div class="row">
+                <div class="col-md-6">
+                    <p id="yourshare"></p>
+                </div>
+                <div class="col-md-6">
+                    <p id="yoursubs"></p>
+                </div>
+                 
             </div>
-             
-        </div>
+
+         <hr>
+            <br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p id="yourdonations"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p id="yourdonators"></p>
+                    </div>
+                     
+                </div>
+
+               
+                <div class="row  ">
+                    <div class="col-md-12 ">
+                        <input id="walletInput" placeholder="Enter Wallet Address" class="form-control" style="display: none;">
+                        <p class="mt-3 " id="note" style="display: none;">Link your wallet to receive the donation.</p>
+                        <button id="linkWallet" style="display: none;" class="bg-dark btn btn-success rounded-pill">Link Wallet</button>
+
+                    </div>
+                     
+                     
+                </div>
+    
+                
+            </div>
     </div>
 
 </body>
@@ -221,6 +259,7 @@
         var  acc1,tok;
         
         var rinkRemixContract = createrinkContract();
+        var donRemixContract = createdonatecnt();
         var price,price2;
         //start of compound js calls
         
@@ -270,28 +309,110 @@
         $("#checkbalartist").click(function(){
             var tbou;
             var artisid = $("#artisID").val();
-            alert("artisid"+artisid);
+            //alert("artisid"+artisid);
 
             (async function(){
             let subcount = await RemixContract.getSubCount(artisid);
             console.log(artisid+"sub total count: "+subcount);
             let totalcount = await RemixContract.getallsub();
+            if(totalcount%8!=0)
+            {
+                totalcount = totalcount - (totalcount%8);
+
+            }
             console.log("All sub: "+totalcount);
             totalstake = totalcount*250000000000000000;
             tbou = viewBou(currentAccount);
-            console.log("View Bou: "+tbou);   
-            totalinterest = tbou - totalstake;
-            totalinterest = Math.abs(totalinterest);
-            pershare = totalinterest/totalcount;
-            artistshare = subcount*pershare;
-            artistshare = Web3.utils.fromWei(String(artistshare), 'ether');
-            console.log("Your share : "+artistshare);
-            console.log("Total interest: "+totalinterest);
-            $("#yourshare").html(artistshare+" ETH");
-            const etherValue = Web3.utils.fromWei(String(totalinterest), 'ether');
-            console.log(etherValue);
+            if(tbou==null)
+            {
+               
+                let c = await rinkRemixContract.viewbou();
+                console.log(c);
+                tbou = c;
+                console.log("View Bou: "+tbou);   
+                totalinterest = tbou - totalstake;
+                //totalinterest = Math.abs(totalinterest);
+                pershare = totalinterest/totalcount;
+                artistshare = subcount*pershare;
+                artistshare = Web3.utils.fromWei(String(artistshare), 'ether');
+                console.log("Your share : "+artistshare);
+                console.log("Total interest: "+totalinterest);
+                $("#yourshare").html("You have earned <strong>"+artistshare+"</strong> ETH(s).");
+                $("#yoursubs").html("You have <strong>"+subcount+"</strong> Subscribers.");
+
+                const etherValue = Web3.utils.fromWei(String(totalinterest), 'ether');
+                console.log(etherValue);
+
+            }
+            else{
+
+                console.log("View Bou: "+tbou);   
+                totalinterest = tbou - totalstake;
+                //totalinterest = Math.abs(totalinterest);
+                pershare = totalinterest/totalcount;
+                artistshare = subcount*pershare;
+                artistshare = Web3.utils.fromWei(String(artistshare), 'ether');
+                console.log("Your share : "+artistshare);
+                console.log("Total interest: "+totalinterest);
+                $("#yourshare").html("You have earned <strong>"+artistshare+"</strong> ETH(s).");
+                $("#yoursubs").html("You have <strong>"+subcount+"</strong> Subscribers.");
+
+                const etherValue = Web3.utils.fromWei(String(totalinterest), 'ether');
+                console.log(etherValue);
+
+
+                let donation = await donRemixContract.showDonations(String(artisid));
+                const amt = Web3.utils.fromWei(String(donation), 'ether');
+
+                $("#yourdonations").html("You have received a donation of: <strong>"+amt+"</strong> ETH(s)");
+
+
+                 document.querySelector('#linkWallet').style.display="block";
+                 document.querySelector('#walletInput').style.display="block";
+                 document.querySelector('#note').style.display="block";
+
+
+                 var isWalletLinked = await donRemixContract.checklinked(artisid);
+
+                 if(!isWalletLinked)
+                 {
+                    $("#walletInput").prop('readonly', false);
+                    $("#linkWallet").html("Link Wallet");
+                    $("#linkWallet").click(async function(){
+                        
+                        let link = await donRemixContract.linkWallet(String($('#walletInput').val()),artisid);
+                            console.log(link);
+
+                     
+                    });
+                 }
+                 else if(isWalletLinked){
+                     
+                    $("#linkWallet").html("Redeem");
+
+                    let walletAddress = await donRemixContract.showAdd(String(artisid));
+
+                    $("#walletInput").val(walletAddress);
+                    $("#walletInput").prop('readonly', true);
+                    $("#note").html("A wallet is already linked to your Artist ID, You can redeem your Donations now.");
+                    $("#linkWallet").click(async function(){
+
+                   let redeemDonation = redeemDonations(walletAddress,artisid); 
+                     
+                    });
+                 }
+                 
+
+            }
+                
+           
+               
             })().catch(console.log);
 
+
+ 
+
+                
         });
             //var  txhash = checkBou(currentAccount);
             //console.log("Check bou: "+txhash);

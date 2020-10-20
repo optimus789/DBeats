@@ -96,7 +96,11 @@
          </style>
 </head>
 <body background-image="https://www.geeksforgeeks.org/wp-content/uploads/jquery-banner-768x256.png">
-<div class="section"></div>
+<div class="section">
+
+
+    
+</div>
 <script src="https://cdn.jsdelivr.net/npm/kursor@0.0.14/dist/kursor.js"></script>
 <nav class="navbar navbar-expand-lg navbar-light transparent" style="box-shadow: none;">
 <a class="navbar-brand" href="#"><img src="img/DBeatsVert.png" width="30" height="30" alt="">
@@ -107,7 +111,7 @@
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 <ul class="navbar-nav mr-auto">
 <li class="nav-item active">
-<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+<a class="nav-link active" href="account.html">Dashboard<span class="sr-only"> </span></a>
 </li>
 <li class="nav-item d-none">
 <a class="nav-link" href="#">Link</a>
@@ -129,7 +133,7 @@ Dropdown
 </ul>
 
 <div class="md-form active-purple active-purple-2  ">
-<input class="form-control" type="text" placeholder="Search" aria-label="Search">
+<input class="form-control d-none" type="text" placeholder="Search" aria-label="Search">
 </div>
 </div>
 </nav>
@@ -144,6 +148,11 @@ Dropdown
 </div>
 
 <p class="account text-center  mt-3" style="display: none;">Account: <span class="showAccount "></span></p>
+
+
+
+
+
 <h1 class="text-center  mt-3  ">Trending Tracks</h1>
 <div id="demo" style="padding-bottom:50px; ">
 </div>
@@ -165,11 +174,18 @@ Title
 <div id="artist">
 Artist
 </div>
-<button class="btn    rounded-pill  " id="subscribe" data-artist="" style="width: 150px;" type="submit"><strong>SUBSCRIBE</strong></button>
+<button class="btn    rounded-pill " data-custom-open="modal-1" id="subscribe" data-artist="" style="width: 150px;" type="submit"><strong>SUBSCRIBE</strong></button>
+ 
 </div>
 </div>
 <audio id="music-player" class="mt-3 bg-transparent" controls><source id="music-player-src" src="https://discoveryprovider.audius.co/v1/tracks/5QBJ1/stream" type="audio/mpeg">Your browser does not support the audio element.</audio> </div>
 </div>
+
+
+
+
+
+
 </body>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -192,6 +208,9 @@ Artist
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/kursor@0.0.14/dist/kursor.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+
 <script src="script.js"></script>
 <script src="scripts/animation.js"></script>
 <script src="scripts/somedec.js" type="text/javascript"></script>
@@ -211,7 +230,6 @@ Artist
 
 */
 var web;
-
 
    
 loadTrending(); 
@@ -279,7 +297,8 @@ getAccount();
         var subscribedTo="";
 
         var selectedArtworkUrl ="https://via.placeholder.com/150";
-
+ 
+        var portis = null;
         var abi = [
 	{
 		"inputs": [
@@ -450,15 +469,25 @@ getAccount();
                 {
                     $('#demo3').html('<div class="text-center"><lottie-player src="https://assets7.lottiefiles.com/packages/lf20_EMTsq1.json"  background="transparent"  speed="1"  style="width: 600px; height: 600px;" loop   autoplay></lottie-player></div>');
                 }
-               for(var i = 0;i<subscribedTo.length;i++)
+                var sourceUrl =[];
+ 
+
+                    for(var i = 0;i<subscribedTo.length;i++)
                     {
                         console.log("foR:"+i);
-                        var sourceUrl = getJSON("https://discoveryprovider3.audius.co/v1/users/"+subscribedTo[i]+"/tracks");
+                        sourceUrl[i] = getJSON("https://discoveryprovider3.audius.co/v1/users/"+subscribedTo[i]+"/tracks");
                     
-                            gjson3 = JSON.parse(sourceUrl);
+                    }
 
-                            for(var j =0;j<gjson3.data.length;j++)//gjson3.data.length
+
+                            
+                        
+
+                            for(var i =0;i<sourceUrl.length;i++)//gjson3.data.length
                                 {
+                                gjson3 = JSON.parse(sourceUrl[i]);
+                                for(var j= 0;j<gjson3.data.length;j++)
+                                    {
                                 var artwork = gjson3.data[j].artwork['150x150'];
                                 var description = gjson3.data[j].description;
                                 var duration = gjson3.data[j].duration;
@@ -491,8 +520,8 @@ getAccount();
                                 $('#demo3').append(trackLayout); 
                                 }
 
-
-                    }
+                            }
+                     
 
                 }
 
@@ -524,7 +553,7 @@ getAccount();
             }
             audio.load();//suspends and restores all audio element
             title.innerHTML = $(this).attr('name');
-            artist.innerHTML = "By : "+$(this).attr("data-artist")
+            artist.innerHTML =  $(this).attr("data-artist");
             //audio[0].play(); changed based on Sprachprofi's comment below
 
             audio.oncanplaythrough = audio.play();
@@ -535,12 +564,20 @@ getAccount();
             {
                 //alert($(this).attr("data-artistid"));
                 subscribed = true;
-                $("#subscribe").attr("style", "opacity:0%"); 
-                $("#subscribe").prop('disabled', true);
+
+                $("#subscribe").html("DONATE"); 
+
+ //               $("#subscribe").attr("style", "opacity:0%"); 
+   //             $("#subscribe").prop('disabled', true);
+
+
+                
             }else{
                 subscribed = false;
-                $("#subscribe").attr("style", "opacity:100%");  
-                $("#subscribe").prop('disabled', false);
+                $("#subscribe").html("SUBSCRIBE"); 
+
+               // $("#subscribe").attr("style", "opacity:100%");  
+              //  $("#subscribe").prop('disabled', false);
 
             }
             
@@ -550,8 +587,10 @@ getAccount();
         function play(thiselemt) {
 
             subscribed = true;
-            $("#subscribe").attr("style", "opacity:0")
-            $("#subscribe").prop('disabled', true);
+            $("#subscribe").html("DONATE"); 
+
+           // $("#subscribe").attr("style", "opacity:0")
+          //  $("#subscribe").prop('disabled', true);
 
             var thiselement = thiselemt;
              var sourceUrl = "https://discoveryprovider.audius.co/v1/tracks/"+$(thiselement).attr("data-id")+"/stream";
@@ -576,7 +615,7 @@ getAccount();
             }
             audio.load();//suspends and restores all audio element
             title.innerHTML = $(thiselement).attr('name');
-            artist.innerHTML = "By : "+$(thiselement).attr("data-artist")
+            artist.innerHTML = $(thiselement).attr("data-artist");
             //audio[0].play(); changed based on Sprachprofi's comment below
 
             audio.oncanplaythrough = audio.play();
@@ -720,9 +759,10 @@ getAccount();
                         const receipt = await tx;
                         return receipt;
                         }
-
+                        var receipt;
         $("#subscribe").click(function() {
            
+            if(!subscribed){
            
                                 $.LoadingOverlay("show", {
                                     image       : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle r="80" cx="500" cy="90"/><circle r="80" cx="500" cy="910"/><circle r="80" cx="90" cy="500"/><circle r="80" cx="910" cy="500"/><circle r="80" cx="212" cy="212"/><circle r="80" cx="788" cy="212"/><circle r="80" cx="212" cy="788"/><circle r="80" cx="788" cy="788"/></svg>',
@@ -734,12 +774,21 @@ getAccount();
                 sendTx()
                 .then(receipt => {
                     console.log("Got receipt");
-                    myStorage.setItem('checkbouval', checkbouval+1);
+                    checkbouval = parseInt(checkbouval) + 1;
+                    myStorage.setItem('checkbouval', checkbouval);
+                    if(checkbouval%4==0)
+                    {
+                            var  txhash = checkBou(currentAccount);
+                            console.log("Check bou: "+txhash);
+            
+                    }
                     $.LoadingOverlay("text", "Transaction Confirmed, Enjoy your songs", {
                         textClass : "overlaytxt"
                     });
                     setTimeout(function(){
                         $.LoadingOverlay("hide");
+
+                         
                     }, 500);
                     
                     
@@ -755,7 +804,32 @@ getAccount();
                     $.LoadingOverlay("hide");
                 } );
 
-                        
+            }
+            else{
+                var artistId = $(this).attr("data-artist");
+                
+                if(portis==null){
+                    getPortisAccount();
+                }
+                else{
+                    portis.showPortis();
+                }
+
+                bootbox.prompt("You are donating to : <strong>"+$("#artist").html()+"</strong><br><small>Make a Payment to : <strong>0xb4f386b14e9Adc31096Ee0F6640804815a56C456</strong><br></small> Enter the Transaction Hash to Confirm Donation.", function(result){
+                    /* your callback code */ 
+                    console.log(result);
+                     
+                    receipt  = web3.eth.getTransaction(result).then( async function(v){ 
+
+
+
+                    donRemixContract = createdonatecnt();   
+                    let donate = await donRemixContract.setDonate(artistId,v.value); 
+
+                    console.log(v.value);
+                });
+                });
+            }      
             /*ethereum.request({
             method: 'eth_sendTransaction',
             params: [
@@ -866,9 +940,18 @@ getAccount();
         getAccount();
          
         });
+        var checkbouval;
+        var myStorage = window.localStorage; 
+        if(myStorage.getItem('checkbouval')==null)
+        { 
+            checkbouval = 0; 
 
-        var myStorage = window.localStorage;
-        var checkbouval = myStorage.getItem('checkbouval');
+        }
+        else
+        {
+            checkbouval =  parseInt(myStorage.getItem('checkbouval'));
+
+        }
         //var checkbou;
         async function getAccount() {
        
@@ -912,27 +995,14 @@ getAccount();
         function getPortisAccount()
         {        
                 var portiswltaddr   ;  
-                const portis = new Portis('2751e082-3ba0-4302-a7e9-3391f8f56ea8', "maticMumbai");  
+               portis = new Portis('2751e082-3ba0-4302-a7e9-3391f8f56ea8', "rinkeby");  
                const web3 = new Web3(portis.provider);  
                 mnemonic = "0";  
                 portis.showPortis();    
                 portis.onLogin((walletAddress, email) => {   
                     portiswltaddr = walletAddress;   
                     
-                    document.querySelector('.account').style.display="block" 
-                    document.querySelector('.portisButton').style.display="none"
-                    document.querySelector('.metamaskButton').style.display="none"
-
-                    document.querySelector('.connectedPortis').style.display="block" 
-
-                    document.querySelector('.connectionCard').style.height="55px" 
-                    document.querySelector('.connectionCard').style.width="205px" 
-                    document.querySelector('.connectionCard').style.background="#c6ff00" 
-                    document.querySelector('.connectionCard').style.color="#FFF" 
-                    
-                    document.querySelector('.metamaskButton').style.display="none"
-                    document.querySelector('.subscribeText').style.display="none"
-                    showAccount.innerHTML = walletAddress;                        
+                    //showAccount.innerHTML = walletAddress;                        
                 
             }); 
         }  

@@ -77,7 +77,7 @@ h1{
   border: 2px solid #16E9E5;
 }
 .shadow-img{
-  filter: drop-shadow(0 0 0.55rem #fff)!important;
+  filter: drop-shadow(0 0 0.35rem #fff)!important;
 
 }
 .fixed-bottom /* position fixed Bottom */{position:fixed;bottom:0px;top:auto;}
@@ -104,6 +104,7 @@ transition: all 0.5s;
   animation-duration: 1s;
   color: #16E9E5; 
 }   
+ 
 
 @keyframes example {
   0%   {background-color: #0093E9;}

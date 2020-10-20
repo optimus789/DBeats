@@ -281,6 +281,7 @@
             tbou = viewBou(currentAccount);
             console.log("View Bou: "+tbou);   
             totalinterest = tbou - totalstake;
+            totalinterest = Math.abs(totalinterest);
             pershare = totalinterest/totalcount;
             artistshare = subcount*pershare;
             artistshare = Web3.utils.fromWei(String(artistshare), 'ether');

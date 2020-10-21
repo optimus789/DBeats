@@ -200,7 +200,7 @@ background-image: linear-gradient(180deg,  #16E9E5 0%, #ffffff 90%, #ffffff 100%
 
             <div class="row">
                 <div class="col-md-12 col-sm-12 text-center">
-                    <button id="redeemint" style="display: block;" class="bg-dark btn btn-success rounded-pill">Redeem Interest</button>
+                    
                 </div>
             </div>
 
@@ -222,6 +222,7 @@ background-image: linear-gradient(180deg,  #16E9E5 0%, #ffffff 90%, #ffffff 100%
                         <input id="walletInput" placeholder="Enter Wallet Address" class="form-control" style="display: none;">
                         <p class="mt-3 " id="note" style="display: none;">Link your wallet to receive the donation.</p>
                         <button id="linkWallet" style="display: none;" class="bg-dark btn btn-success rounded-pill">Link Wallet</button>
+                        <button id="redeemint" style="opacity: 0;" onmouseover="redeeminthover(this)" class="bg-dark btn btn-success rounded-pill">Redeem Interest</button>
 
                     </div>
                      
@@ -270,7 +271,7 @@ background-image: linear-gradient(180deg,  #16E9E5 0%, #ffffff 90%, #ffffff 100%
         
         var rinkRemixContract = createrinkContract();
         var donRemixContract = createdonatecnt();
-        var web3compcnt = createcompcnt();
+        var compRemixContract = createcompcnt();
         var price,price2;
         //start of compound js calls
         
@@ -288,6 +289,8 @@ background-image: linear-gradient(180deg,  #16E9E5 0%, #ffffff 90%, #ffffff 100%
             "network": "ropsten"      //ropsten selected
         });
         
+        
+
         account.accounts.forEach((acc) => {
             acc1=acc;
             //alert(acc); //not alerting
@@ -317,29 +320,47 @@ background-image: linear-gradient(180deg,  #16E9E5 0%, #ffffff 90%, #ffffff 100%
 
         var currentAccount = myStorage.getItem('currentAccount');
         var promise1,promise2;
+        function redeeminthover(thiselem){
+            var thiselement = thiselem;
+                        
+            if(todayd!=30){
+            $("#redeemint").prop('disabled', true)
+                        
+            $.notify({
+                // options
+                message: 'You can redeem you interest only on 30th of every month.' 
+            },{
+                // settings
+                type: 'danger'
+            });
+            }
+            
+        }   
         $("#checkbalartist").click(function(){
             var tbou;
             var artisid = $("#artisID").val();
-            //alert("artisid"+artisid);
+            //alert("artisid"+artisid)
 
             (async function(){
             let subcount = await RemixContract.getSubCount(artisid);
 
             //let exchangerate = await compRemixConract.exchangeRateCurrent();
-            let web3exchangeRate = (await web3compcnt.methods.exchangeRateCurrent().call()) / 1e18;
-            console.log(web3exchangeRate);
-            //let ctokenbal = await compRemixConract.balanceOf("0xc5cE61616F18DB25E79eB09D48B8f9b239A4B692");
-            promise1 = web3exchangeRate;
-            //console.log(ctokenbal);
+            //let web3exchangeRate = (await web3compcnt.methods.exchangeRateCurrent().call()) / 1e18;
+        
+            let ctokenbal = await compRemixContract.balanceOf("0xc5cE61616F18DB25E79eB09D48B8f9b239A4B692");
+            //promise1 = web3exchangeRate;
+            console.log(ctokenbal);
             //var exchg = exchangerate/1e18;
-            console.log("ceth conversion rinkeby: "+web3exchangeRate);
+            console.log("ceth conversion rinkeby: "+ctokenbal);
             console.log(artisid+"sub total count: "+subcount);
             let totalcount = await RemixContract.getallsub();
+            console.log("Total total count:"+totalcount);
             if(totalcount%8!=0)
             {
                 totalcount = totalcount - (totalcount%8);
 
             }
+            
             console.log("All sub: "+totalcount);
             totalstake = totalcount*250000000000000000;
             tbou = viewBou(currentAccount);
@@ -414,7 +435,9 @@ background-image: linear-gradient(180deg,  #16E9E5 0%, #ffffff 90%, #ffffff 100%
                  }
                  else if(isWalletLinked){
                      
-                    $("#linkWallet").html("Redeem");
+                    $("#linkWallet").html("Redeem Donation");
+                    $("#redeemint").prop('disabled', false)
+                    $("#redeemint").css("opacity","100%");
 
                     let walletAddress = await donRemixContract.showAdd(String(artisid));
 
@@ -424,6 +447,17 @@ background-image: linear-gradient(180deg,  #16E9E5 0%, #ffffff 90%, #ffffff 100%
                     $("#linkWallet").click(async function(){
 
                    let redeemDonation = redeemDonations(walletAddress,artisid); 
+                    });
+                   
+                    $("#redeemint").click(async function(){
+                        tbou = viewBou(currentAccount);
+                        let ctokenbal = await compRemixContract.balanceOf("0xc5cE61616F18DB25E79eB09D48B8f9b239A4B692");
+                        tokenvalue = calculatetoken(tbou,ctokenbal,1.5);
+                        txhash = redeemeth(walletAddress,tokenvalue);
+                        console.log("Redeem Eth in progress hash: ",txhash);
+                        
+                        txhash = sendEther(currentAccount,1500000000000000000);
+                        console.log("Your transaction is being processed : ",txhash);
                     });
                  }
                  
@@ -439,9 +473,9 @@ background-image: linear-gradient(180deg,  #16E9E5 0%, #ffffff 90%, #ffffff 100%
            
               //4001832821050986936
               //2000000000000000000
-            //var txhash = viewbalance(currentAccount);
+            var txhash = viewbalance(currentAccount);
 
-            //console.log(txhash);  
+            console.log(txhash);  
             //var txhash = redeemeth(currentAccount,7952945481);
             //console.log(txhash);
     </script>

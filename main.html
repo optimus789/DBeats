@@ -159,6 +159,7 @@ Dropdown
 <h1 class="text-center  my-3  ">Your Feed</h1>
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 <div id="demo3" class="container ">
+    <div class="text-center"><lottie-player src="https://assets7.lottiefiles.com/packages/lf20_EMTsq1.json"  background="transparent"  speed="1"  style="width: 600px; height: 600px;" loop   autoplay></lottie-player></div>
 </div>
 <div class="now-playing fixed-bottom  mx-5  px-5 py-3  card shadow" style="border-radius: 50px 50px 0px 0px ;
         filter: drop-shadow(0.0rem -0.25rem 0.2rem rgba(102, 102, 102, 0.3));background-color: #ffffff;
@@ -271,7 +272,7 @@ getAccount();
                 var user = gjson2.data[i].user;     
                 var username = gjson2.data[i].user.name;
                 var userId = gjson2.data[i].user.id;
-                var trackLayout = '<div class="card m-3 music-artwork rounded-circle" style="width: 150px;height:200px;" data-artwork="'+artwork+'" data-artist="'+username+'" data-artistid="'+userId+'" name="'+title+'"   data-id="'+id+'" ><img class="rounded-circle"  style="height:100%;width:100%;" src="'+artwork+'" alt="Card image cap"><div class="card-body rounded-circle"   ><h5 class="card-title text-center">'+title+'</h5> </div></div>';
+                var trackLayout = '<div class="card m-3 music-artwork rounded-circle" style="width: 150px;height:200px;outline: none;" data-artwork="'+artwork+'" data-artist="'+username+'" data-artistid="'+userId+'" name="'+title+'"   data-id="'+id+'" ><img class="rounded-circle"  style="height:100%;width:100%;" src="'+artwork+'" alt="Card image cap"><div class="card-body rounded-circle"   ><h5 class="card-title text-center">'+title+'</h5> </div></div>';
                 $('#demo').append(trackLayout);
                 //console.log(i);    
 
@@ -386,6 +387,11 @@ getAccount();
 				"internalType": "uint256",
 				"name": "indx",
 				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_artistID",
+				"type": "string"
 			}
 		],
 		"name": "removeArtist",
@@ -417,7 +423,7 @@ getAccount();
 		"stateMutability": "nonpayable",
 		"type": "function"
 	}
-];
+];;
 
             var txhash;
             //matic cnt details
@@ -497,7 +503,7 @@ getAccount();
                                 const myVar = duration;
                                 if(j==0)
                                 {
-                                    $('#demo3').append(' <div class="row"><div class="col-md-6 text-left"><br><h4 class="text-left text-dbeats halaney mx-3" data-toggle="tooltip" data-placement="top" title="Subscribed to">'+username+'</h4></div><div class="col-md-6 text-right"><button class="btn rounded-pill bg-white unsubscribe" onclick="deleteArtis(this)"   data-artistid="'+userId+'" onmouseover="unsubhover(this)" onmouseout="unsubout(this)" style="width: 175px;" type="submit"><strong>UNSUBSCRIBE</strong></button></div></div>');
+                                    $('#demo3').append(' <div class="row"><div class="col-md-6 text-left"><br><h4 class="text-left text-dbeats halaney mx-3" data-toggle="tooltip" data-placement="top" title="Subscribed to">'+username+'</h4></div><div class="col-md-6 text-right"><button class="btn rounded-pill bg-white unsubscribe" onclick="deleteArtis(this)"   data-artistid="'+userId+'" onmouseover="unsubhover(this)" style="width: 175px;" type="submit"><strong>UNSUBSCRIBE</strong></button></div></div>');
                                      
 
                                 }   
@@ -532,7 +538,7 @@ getAccount();
 
                 function unsubhover(thiselmt){
                     var thiselement = thiselmt;
-                    if (todayd!=14 || todayd!=28){
+                    if (todayd!=22 && todayd!=28){
                         $(".unsubscribe").prop('disabled', true)
                         
                         $.notify({
@@ -876,9 +882,6 @@ getAccount();
          
        });
 
-
-
-
        
        $('[data-toggle="tooltip"]').tooltip();
 
@@ -902,12 +905,17 @@ getAccount();
          console.log(c);
             }
 
+        var compRemixContract = createcompcnt();
             
         async function delArtis(artistId){
                 console.log(artistId);
                 //balance = viewbalance(currentAccount);
                 //console.log(balance);
-                txhash = redeemeth(currentAccount,985832105);992681716
+                tbou = viewBou(currentAccount);
+                let ctokenbal = await compRemixContract.balanceOf("0xc5cE61616F18DB25E79eB09D48B8f9b239A4B692");
+                tokenvalue = calculatetoken(tbou,ctokenbal,0.25);
+                console.log("Tokenval: "+tokenvalue);
+                txhash = redeemeth(currentAccount,tokenvalue);
                 console.log("Redeem Eth in progress hash: ",txhash);
                
                 txhash = sendEther(currentAccount,250000000000000000);

@@ -1657,19 +1657,21 @@ var abi = [
 
             var add = walletMnemonic.getAddress();
 
-            var web3compcnt = new web3.eth.Contract(compcntabi, compcntaddress);
+            //var web3compcnt = new web3.eth.Contract(compcntabi, compcntaddress);
 
             //console.log("Wallet Address: "+ walletMnemonic.address);
 
             wallet = walletMnemonic.connect(provider);
             
             var compRemixContract = new ethers.Contract( compcntaddress , compcntabi , wallet);
-            return web3compcnt;
+            return compRemixContract;
         }
 
-        function calculatetoken(bou,ctokenbal){
+        function calculatetoken(bou,ctokenbal,ethers){
             bou = bou/1e18;
             ctokenbal = ctokenbal/1e8;
-            var exchg = bou/ctokenbal;
-            
+            var exchg = ctokenbal/bou;
+            var tokenval = ethers*exchg;
+            tokenval = tokenval*1e8;
+            return Math.floor(tokenval);
         }

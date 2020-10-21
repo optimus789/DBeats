@@ -278,8 +278,9 @@ getAccount();
         }
 
         }
-
-       var subscribed = false;
+        var dateob = new Date();
+        var todayd = dateob.getDate();
+        var subscribed = false;
         var audio = document.getElementById('music-player');
         
         var source = document.getElementById('music-player-src');
@@ -500,7 +501,7 @@ getAccount();
                                 const myVar = duration;
                                 if(j==0)
                                 {
-                                    $('#demo3').append(' <div class="row"><div class="col-md-6 text-left"><br><h4 class="text-left text-dbeats halaney mx-3" data-toggle="tooltip" data-placement="top" title="Subscribed to">'+username+'</h4></div><div class="col-md-6 text-right"><button class="btn rounded-pill bg-white unsubscribe" onclick="deleteArtis(this)"   data-artistid="'+userId+'" style="width: 175px;" type="submit"><strong>UNSUBSCRIBE</strong></button></div></div>');
+                                    $('#demo3').append(' <div class="row"><div class="col-md-6 text-left"><br><h4 class="text-left text-dbeats halaney mx-3" data-toggle="tooltip" data-placement="top" title="Subscribed to">'+username+'</h4></div><div class="col-md-6 text-right"><button class="btn rounded-pill bg-white unsubscribe" onclick="deleteArtis(this)"   data-artistid="'+userId+'" onmouseover="unsubhover(this)" onmouseout="unsubout(this)" style="width: 175px;" type="submit"><strong>UNSUBSCRIBE</strong></button></div></div>');
                                      
 
                                 }   
@@ -533,6 +534,29 @@ getAccount();
                     delArtis(artisId);
                     
                 };
+
+                function unsubhover(thiselmt){
+                    var thiselement = thiselmt;
+                    if (todayd!=14 || todayd!=28){
+                        $(".unsubscribe").prop('disabled', true)
+                        
+                        $.notify({
+                            // options
+                            message: 'You can unsub an artist 2 times in a month!' 
+                        },{
+                            // settings
+                            type: 'danger'
+                        });
+                        
+                    }
+                    
+                }
+                /*function unsubout(thiselmt){
+                    var thiselement = thiselmt;
+
+                    console.log("out");
+                }*/
+                
         var nowplayingcard = "";
         $(".music-artwork").click(function() {
 

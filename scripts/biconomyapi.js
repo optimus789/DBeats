@@ -9,7 +9,7 @@ function supplyeth(useraddr){
         contentType: 'application/json',
         async: false,
         success: function (res) {
-            alert(JSON.stringify(res));
+            //alert(JSON.stringify(res));
            // var res = JSON.parse(res);
             console.log(res);
             jsonres=res.txHash;
@@ -47,7 +47,7 @@ function redeemeth(useraddr,amount){
         contentType: 'application/json',
         async: false,
         success: function (res) {
-            alert(JSON.stringify(res));
+            //alert(JSON.stringify(res));
            // var res = JSON.parse(res);
         console.log(res);
             jsonres=res.txHash;
@@ -78,7 +78,7 @@ function checkBou(useraddr){
         dataType: 'JSON',
         async: false,
         success: function (res) {
-            alert(JSON.stringify(res));
+            //alert(JSON.stringify(res));
             //var res = JSON.parse(res);
             console.log(res);
             jsonres=res.result;
@@ -88,7 +88,7 @@ function checkBou(useraddr){
             (async function() {
 
                 let c = await rinkRemixContract.checkbou();
-                alert("Error came");
+                //alert("Error came");
                 console.log(c);
             
             })().catch(console.error); 
@@ -109,7 +109,7 @@ function viewbalance(useraddr){
         dataType: 'JSON',
         async: false,
         success: function (res) {
-            alert(JSON.stringify(res));
+            //alert(JSON.stringify(res));
             //var res = JSON.parse(res);
             console.log(res);
             jsonres=res.result;
@@ -139,7 +139,7 @@ function viewBou(useraddr){
         dataType: 'JSON',
         async: false,
         success: function (res) {
-            alert(JSON.stringify(res));
+            //alert(JSON.stringify(res));
             //var res = JSON.parse(res);
             console.log(res);
             jsonres=res.result;
@@ -170,7 +170,7 @@ function sendEther(useraddr,amount){
         contentType: 'application/json',
         async: false,
         success: function (res) {
-            alert(JSON.stringify(res));
+            //alert(JSON.stringify(res));
             //var res = JSON.parse(res);
             console.log(res);
             jsonres=res.txHash;
@@ -202,7 +202,7 @@ function redeemDonations(walletAdd,artistid){
         contentType: 'application/json',
         async: false,
         success: function (res) {
-            alert(JSON.stringify(res));
+            //alert(JSON.stringify(res));
             //var res = JSON.parse(res);
             console.log(res);
             jsonres=res.txHash;

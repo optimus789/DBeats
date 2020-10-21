@@ -278,8 +278,7 @@ getAccount();
         }
 
         }
-        var dateob = new Date();
-        var todayd = dateob.getDate();
+        
         var subscribed = false;
         var audio = document.getElementById('music-player');
         
@@ -427,7 +426,7 @@ getAccount();
             if (segmentEnd && audio.currentTime >= segmentEnd) {
                 audio.pause();
             }   
-            console.log(audio.currentTime);
+            //console.log(audio.currentTime);
             if(!subscribed&&audio.currentTime>10)
             {
                 audio.pause(); 
@@ -481,9 +480,6 @@ getAccount();
                     }
 
 
-                            
-                        
-
                             for(var i =0;i<sourceUrl.length;i++)//gjson3.data.length
                                 {
                                 gjson3 = JSON.parse(sourceUrl[i]);
@@ -522,7 +518,6 @@ getAccount();
                                 }
 
                             }
-                     
 
                 }
 
@@ -542,7 +537,7 @@ getAccount();
                         
                         $.notify({
                             // options
-                            message: 'You can unsub an artist 2 times in a month!' 
+                            message: 'You can unsubscribe an artist on 14th and 28th of every month.' 
                         },{
                             // settings
                             type: 'danger'
@@ -906,15 +901,13 @@ getAccount();
                 subscribedTo = subscribedTo.split(","); 
          console.log(c);
             }
-  
-
 
             
         async function delArtis(artistId){
                 console.log(artistId);
                 //balance = viewbalance(currentAccount);
                 //console.log(balance);
-                txhash = redeemeth(currentAccount,985832105);
+                txhash = redeemeth(currentAccount,985832105);992681716
                 console.log("Redeem Eth in progress hash: ",txhash);
                
                 txhash = sendEther(currentAccount,250000000000000000);
@@ -994,15 +987,15 @@ getAccount();
         document.querySelector('.connectionCard').style.width="205px" 
         document.querySelector('.connectionCard').style.background="#c6ff00" 
         document.querySelector('.connectionCard').style.color="#FFF" 
-
-
-         document.querySelector('.subscribeText').style.display="none"
+        
+        document.querySelector('.subscribeText').style.display="none"
   
         //    const bal = await Compound.comp.getCompBalance('0x2775b1c75658Be0F640272CCb8c72ac986009e38');
         //    console.log('Balance', bal);
         const OPTIONS = {
         defaultBlock: "latest",
         };
+        
 
         web3 = new Web3(
         window.ethereum,
@@ -1015,12 +1008,23 @@ getAccount();
             loadFeed(); 
         }
 
+        portisButton.addEventListener('click', () => {
+        //Will Start the metamask extension
+        $.notify({
+                    // options
+                    message: 'Currently portis can be used for just donations. Kindly use metamask !' 
+                },{
+                    // settings
+                    type: 'info'
+                });
+         
+        });
 
         function getPortisAccount()
         {        
-                var portiswltaddr   ;  
-               portis = new Portis('2751e082-3ba0-4302-a7e9-3391f8f56ea8', "rinkeby");  
-               const web3 = new Web3(portis.provider);  
+                var portiswltaddr ;  
+                portis = new Portis('2751e082-3ba0-4302-a7e9-3391f8f56ea8', "rinkeby");  
+                const web3 = new Web3(portis.provider);  
                 mnemonic = "0";  
                 portis.showPortis();    
                 portis.onLogin((walletAddress, email) => {   

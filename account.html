@@ -117,6 +117,9 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="main.html">Home <span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item">
+                    <span class="mx-4 nav-link" id="compoundrates"></span>
+                </li>
                 <li class="nav-item d-none">
                     <a class="nav-link" href="#">Link</a>
                 </li>
@@ -175,12 +178,17 @@ background-image: linear-gradient(180deg,  #16E9E5 0%, #ffffff 90%, #ffffff 100%
                 <input id="artisID" placeholder="Type your Artist ID" class="form-control mt-3" type="text">
 
             </div> 
-            <button id="checkbalartist" class="btn btn-success bg-dark rounded-pill">Check Balance</button>
+           
 
+        </div>
+        <div class="row">
+            <div class="col-md-6 mt-2">
+            <button id="checkbalartist" class="btn btn-success bg-dark rounded-pill">Check Balance</button>
+        </div> 
         </div>
         
 
-            <div class="row">
+            <div class="row mt-2">
                 <div class="col-md-6">
                     <p id="yourshare"></p>
                 </div>
@@ -188,6 +196,12 @@ background-image: linear-gradient(180deg,  #16E9E5 0%, #ffffff 90%, #ffffff 100%
                     <p id="yoursubs"></p>
                 </div>
                  
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 text-center">
+                    <button id="redeemint" style="display: block;" class="bg-dark btn btn-success rounded-pill">Redeem Interest</button>
+                </div>
             </div>
 
          <hr>
@@ -250,25 +264,23 @@ background-image: linear-gradient(180deg,  #16E9E5 0%, #ffffff 90%, #ffffff 100%
     <script type="text/javascript">
         var web3;
         var RemixContract;
-        /*var compound = new Compound('ropsten', {
-            mnemonic: 'mnemonicxyz..', // preferably with environment variable
-            });*/
-
-            // 
+        
         var  cethbal;
         var  acc1,tok;
         
         var rinkRemixContract = createrinkContract();
         var donRemixContract = createdonatecnt();
+        var web3compcnt = createcompcnt();
         var price,price2;
         //start of compound js calls
         
         const compound = new Compound();
         (async function () { 
-            price = await compound.getPrice(Compound.cETH,Compound.USDC); 
-            console.log('ceth', price); // 6 decimals, see Open Price Feed docs
-        price2 = await compound.getPrice(Compound.ETH); // supports cTokens too 
-        console.log('eth', price2); })().catch(console.error);
+            price = await compound.getPrice(Compound.ETH); 
+            console.log('ETH', price); // 6 decimals, see Open Price Feed docs
+        price2 = await compound.getPrice(Compound.cETH); // supports cTokens too 
+        console.log('ceth', price2); 
+        $("#compoundrates").html("Current Rates : &nbsp; ETH to USD: $"+ price+" &nbsp;&nbsp; cETH to USD: $"+price2); })().catch(console.error);
 
         async function compcalls(){             // Compound js API call
             const account = await Compound.api.account({
@@ -276,14 +288,13 @@ background-image: linear-gradient(180deg,  #16E9E5 0%, #ffffff 90%, #ffffff 100%
             "network": "ropsten"      //ropsten selected
         });
         
-        
         account.accounts.forEach((acc) => {
             acc1=acc;
             //alert(acc); //not alerting
             acc.tokens.forEach((tok) => {
-                //alert("Check sym"+tok.symbol);//no tokens are fetched here
+                //alert("Check sym"+tok.symbol);
                 if (tok.symbol === Compound.cETH) {
-                    //alert("Ran"+tok.symbol);//not alerting too
+                    //alert("Ran"+tok.symbol);
                 cethbal = tok.supply_balance_underlying;
                 }
             });
@@ -305,7 +316,7 @@ background-image: linear-gradient(180deg,  #16E9E5 0%, #ffffff 90%, #ffffff 100%
         var myStorage = window.localStorage;
 
         var currentAccount = myStorage.getItem('currentAccount');
-
+        var promise1,promise2;
         $("#checkbalartist").click(function(){
             var tbou;
             var artisid = $("#artisID").val();
@@ -313,6 +324,15 @@ background-image: linear-gradient(180deg,  #16E9E5 0%, #ffffff 90%, #ffffff 100%
 
             (async function(){
             let subcount = await RemixContract.getSubCount(artisid);
+
+            //let exchangerate = await compRemixConract.exchangeRateCurrent();
+            let web3exchangeRate = (await web3compcnt.methods.exchangeRateCurrent().call()) / 1e18;
+            console.log(web3exchangeRate);
+            //let ctokenbal = await compRemixConract.balanceOf("0xc5cE61616F18DB25E79eB09D48B8f9b239A4B692");
+            promise1 = web3exchangeRate;
+            //console.log(ctokenbal);
+            //var exchg = exchangerate/1e18;
+            console.log("ceth conversion rinkeby: "+web3exchangeRate);
             console.log(artisid+"sub total count: "+subcount);
             let totalcount = await RemixContract.getallsub();
             if(totalcount%8!=0)
@@ -337,12 +357,14 @@ background-image: linear-gradient(180deg,  #16E9E5 0%, #ffffff 90%, #ffffff 100%
                 artistshare = Web3.utils.fromWei(String(artistshare), 'ether');
                 console.log("Your share : "+artistshare);
                 console.log("Total interest: "+totalinterest);
-                $("#yourshare").html("You have earned <strong>"+artistshare+"</strong> ETH(s).");
+                console.log("USD PRICE: "+price);
+                var earnedtstring = "You have earned <strong>"+artistshare+"</strong> ETH(s) - <strong> $"+String(parseFloat(artistshare*price).toFixed(4))+"</strong> USD(s).";
+                $("#yourshare").html(earnedtstring);
+            
                 $("#yoursubs").html("You have <strong>"+subcount+"</strong> Subscribers.");
 
                 const etherValue = Web3.utils.fromWei(String(totalinterest), 'ether');
                 console.log(etherValue);
-
             }
             else{
 
@@ -354,7 +376,9 @@ background-image: linear-gradient(180deg,  #16E9E5 0%, #ffffff 90%, #ffffff 100%
                 artistshare = Web3.utils.fromWei(String(artistshare), 'ether');
                 console.log("Your share : "+artistshare);
                 console.log("Total interest: "+totalinterest);
-                $("#yourshare").html("You have earned <strong>"+artistshare+"</strong> ETH(s).");
+                var earnedtstring = "You have earned <strong>"+artistshare+"</strong> ETH(s) - <strong> $"+String(parseFloat(artistshare*price).toFixed(4))+"</strong> USD(s).";
+                $("#yourshare").html(earnedtstring);
+                
                 $("#yoursubs").html("You have <strong>"+subcount+"</strong> Subscribers.");
 
                 const etherValue = Web3.utils.fromWei(String(totalinterest), 'ether');
@@ -371,7 +395,11 @@ background-image: linear-gradient(180deg,  #16E9E5 0%, #ffffff 90%, #ffffff 100%
                  document.querySelector('#walletInput').style.display="block";
                  document.querySelector('#note').style.display="block";
 
+                
 
+                if (todayd!=14 || todayd!=28){
+
+                }
                  var isWalletLinked = await donRemixContract.checklinked(artisid);
 
                  if(!isWalletLinked)
@@ -381,9 +409,7 @@ background-image: linear-gradient(180deg,  #16E9E5 0%, #ffffff 90%, #ffffff 100%
                     $("#linkWallet").click(async function(){
                         
                         let link = await donRemixContract.linkWallet(String($('#walletInput').val()),artisid);
-                            console.log(link);
-
-                     
+                        console.log(link);
                     });
                  }
                  else if(isWalletLinked){
@@ -398,44 +424,26 @@ background-image: linear-gradient(180deg,  #16E9E5 0%, #ffffff 90%, #ffffff 100%
                     $("#linkWallet").click(async function(){
 
                    let redeemDonation = redeemDonations(walletAddress,artisid); 
-                     
                     });
                  }
                  
-
-            }
-                
-           
+            }           
                
             })().catch(console.log);
-
-
- 
-
                 
         });
             //var  txhash = checkBou(currentAccount);
             //console.log("Check bou: "+txhash);
             
             //var receipt = web3.eth.getTransactionReceipt(txhash).then(console.log).catch(console.error);
-                
-            
-    
-
            
               //4001832821050986936
               //2000000000000000000
             //var txhash = viewbalance(currentAccount);
-            
+
             //console.log(txhash);  
             //var txhash = redeemeth(currentAccount,7952945481);
             //console.log(txhash);
-
-           
-             
-            
-            
-
     </script>
 
     </html>
